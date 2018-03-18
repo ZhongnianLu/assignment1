@@ -57,7 +57,7 @@ public class ConnectionManager {
 	
 	
 	// add new parent connection by passing three IDs including parents and child
-void addParentConnection(int ID_1,int ID_2,int ID_child){
+    void addParentConnection(int ID_1,int ID_2,int ID_child){
 	
 	    ArrayList<Profile> tem_pList=Pmanager.get_Plist();
 		
@@ -100,9 +100,9 @@ void addParentConnection(int ID_1,int ID_2,int ID_child){
 		return c_list;
 	}
 	
-	// method to check age: comparing each age with age limitation (5 years old)
+	// method to check age: comparing each age with age limitation (16 years old)
 	public boolean age_Check(Connection addConnect) {
-		if(addConnect.getPerson1().getAge()<5||addConnect.getPerson2().getAge()<5) {
+		if(addConnect.getPerson1().getAge()<16||addConnect.getPerson2().getAge()<16) {
 			return false;
 		}else return true;
 		
