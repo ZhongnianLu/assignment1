@@ -92,7 +92,7 @@ public class ConnectionManager {
 		//check whether the parent connection is valid by calling parent check method passing IDs of parents 
 		Parent_Connection addConnect=new Parent_Connection(person1,person2,child);
 		
-		if(parent_Check(addConnect)==true) {c_list.add(addConnect);
+		if(parent_Check(addConnect)==true&&age_Check(addConnect)==true) {c_list.add(addConnect);
 		}
 }
 
@@ -125,7 +125,7 @@ public class ConnectionManager {
 		//check whether the parent connection is valid by calling parent check method passing IDs of parents 
 		Couple_Connection addConnect=new Couple_Connection(person1,person2);
 		
-		if(couple_Check(addConnect)==false) {c_list.add(addConnect);
+		if(couple_Check(addConnect)==false&&age_Check(addConnect)==true) {c_list.add(addConnect);
 		}
 
 		
@@ -209,26 +209,22 @@ public class ConnectionManager {
 			Profile person_y;
 			
 			//create a boolean to help find target connection that contains two IDs we inputed 
-			boolean connection_check=false;
 			
 			person_x=c_list.get(i).getPerson1();
 			
 			person_y=c_list.get(i).getPerson2();
 			
-			
-			if(person_x.getID()==addConnect.getPerson1().getID()&&person_y.getID()==addConnect.getPerson2().getID()) {
-				connection_check=true;
-			}
-			
-			if(person_x.getID()==addConnect.getPerson2().getID()&&person_y.getID()==addConnect.getPerson1().getID()) {
-				connection_check=true;
-			}
-			
-			//check whether the connection we found is a friend connection
-			if(c_list.get(i) instanceof Couple_Connection&&connection_check==true) {
+			if(c_list.get(i) instanceof Couple_Connection) {
+			if(person_x.getID()==addConnect.getPerson1().getID()||person_y.getID()==addConnect.getPerson2().getID()) {
 				couple_repeat=true;
 			}
-		}
+			
+			if(person_x.getID()==addConnect.getPerson2().getID()||person_y.getID()==addConnect.getPerson1().getID()) {
+				couple_repeat=true;
+			}
+			}
+			}
+		
 		
 		return couple_repeat;
 	}
