@@ -45,7 +45,7 @@ public class test {
 		
 		test_MC.addParentConnection(001, 002, 003);
 		
-		//Test: whether friend connection is included in connection list
+		//Test: whether friend connection is added in connection list
 		try {
 		System.out.println("Test add conenction:  "+test_MC.get_Clist().get(0).getPerson1().getName());
 		System.out.println("Test add conenction:  "+test_MC.get_Clist().get(0).getPerson2().getName());
@@ -54,10 +54,13 @@ public class test {
 			
 		}
 		
-		//Test: whether parent connection is included
+		//Test: whether parent connection is added
 		try {
 			System.out.println("Test add conenction:  "+test_MC.get_Clist().get(1).getPerson1().getName());
 			System.out.println("Test add conenction:  "+test_MC.get_Clist().get(1).getPerson2().getName());
+			System.out.println("Test add conenction:  "+test_MC.get_Clist().get(1).getChild().getName());
+			System.out.println("Test add conenction:  "+test_MC.get_Clist().get(1).getChild().getName());
+			System.out.println("Test add conenction:  "+test_MC.get_Clist().get(1).getChild().getName());
 			System.out.println("Test add conenction:  "+test_MC.get_Clist().get(1).getChild().getName());
 
 			}catch(IndexOutOfBoundsException e) {
