@@ -119,9 +119,9 @@ public class ConnectionManager {
 			if(tem_pList.get(i).getID()==ID_1||tem_pList.get(i).getID()==ID_2&&repeat==true) {
 				person2=tem_pList.get(i);
 			}
-						
-     		};
+			};
 		
+			
 		//check whether the parent connection is valid by calling parent check method passing IDs of parents 
 		Couple_Connection addConnect=new Couple_Connection(person1,person2);
 		
