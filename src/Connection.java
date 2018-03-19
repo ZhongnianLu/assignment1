@@ -3,12 +3,15 @@
 public abstract class Connection {
 	
 	//in this task, assume all connections based on two people
-	Profile person1;
-	Profile person2;
+	private Profile person1;
+	private Profile person2;
 	
 	public Connection(Profile person1, Profile person2) {
 		this.person1=person1;
 		this.person2=person2;
+	}
+	
+	public Connection(Couple_Connection couple, Profile child) {
 	}
 	
 	public Profile getPerson1() {
