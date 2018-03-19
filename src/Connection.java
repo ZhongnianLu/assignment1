@@ -35,5 +35,25 @@ public abstract class Connection {
 	
 
 	public abstract boolean check(ArrayList<Connection> c_list) ;
+	
+	public boolean repeat_check(ArrayList<Connection> c_list) {
+		
+		boolean repeat=false;
+		
+		for(int i=0;i<c_list.size();i++) {
+			if(c_list.get(i).getPerson1().getID()==getPerson1().getID() &&c_list.get(i).getPerson2().getID()==getPerson2().getID()&&c_list.get(i).getClass().equals(getClass())){
+				repeat=true;
+				System.out.println("Repeated");
+			}
+			
+			if(c_list.get(i).getPerson2().getID()==getPerson1().getID() &&c_list.get(i).getPerson1().getID()==getPerson2().getID()&&c_list.get(i).getClass().equals(getClass())){
+				repeat=true;
+				System.out.println("Repeated");
+
+			}
+		}
+		
+		return repeat;
+	}
 
 }

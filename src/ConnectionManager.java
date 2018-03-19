@@ -15,10 +15,7 @@ public class ConnectionManager {
 	ArrayList<Connection> c_list=new ArrayList<Connection>();
 	
 	//Provide an instance of Profile manager to access profile list
-	ProfileManager Pmanager;
-	
-	ConnectionCheck  check_tool= new ConnectionCheck();
-	
+	ProfileManager Pmanager;	
 	
 	
 	
@@ -54,12 +51,12 @@ public class ConnectionManager {
 		Friend_Connection addConnect=new Friend_Connection(person1,person2);
 		
 		//check whether the friend connection is valid by calling age check method 
-		if(addConnect.check(c_list)==true) {c_list.add(addConnect);
+		if(addConnect.check(c_list)==true&&addConnect.repeat_check(c_list)==false) {c_list.add(addConnect);
 		
 		success=true;
 		}
 
-		else System.out.println("One of person in the connection is under valid age.");;
+		else System.out.println("One of person in the connection is under valid age.");
 		
 		return success;
 	
@@ -105,7 +102,7 @@ public class ConnectionManager {
 		//check whether the parent connection is valid by calling parent check method passing IDs of parents 
 		Parent_Connection addConnect=new Parent_Connection(person1,person2,child);
 		
-		if(addConnect.check(c_list)==true) {
+		if(addConnect.check(c_list)==true&&addConnect.repeat_check(c_list)==false) {
 			c_list.add(addConnect);
 			success=true;
 		}
@@ -143,7 +140,7 @@ public class ConnectionManager {
 		//check whether the parent connection is valid by calling parent check method passing IDs of parents 
 		Couple_Connection addConnect=new Couple_Connection(person1,person2);
 		
-		if((addConnect.check(c_list)==false) ){c_list.add(addConnect);
+		if((addConnect.check(c_list)==false)&&addConnect.repeat_check(c_list)==false ){c_list.add(addConnect);
 		
 		success=true;
 		}

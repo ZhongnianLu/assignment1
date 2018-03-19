@@ -53,6 +53,8 @@ public class test {
 		
 		//try to add new connections 
 		test_MC.addFriendConnection(002, 005);
+		test_MC.addFriendConnection(002, 005);
+
 		
 		test_MC.addCoupleConnection(002, 005);
 		
@@ -76,9 +78,8 @@ public class test {
 		
 		//Test: whether parent connection is added
 		try {
-			System.out.println("Test add conenction:  "+test_MC.get_Clist().get(2).getPerson1().getName());
-			System.out.println("Test add conenction:  "+test_MC.get_Clist().get(2).getPerson2().getName());
-			System.out.println("Test add conenction:  "+test_MC.get_Clist().get(2).getChild().getName());
+			System.out.println("Test add conenction:  "+test_MC.get_Clist().get(1).getPerson1().getName());
+			System.out.println("Test add conenction:  "+test_MC.get_Clist().get(1).getPerson2().getName());
 			
 			}catch(IndexOutOfBoundsException e) {
 				System.out.println("Not valid");
