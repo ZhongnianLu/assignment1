@@ -19,13 +19,15 @@ public class ConnectionManager {
 	
 	
 	//Method to create a friend connection
-	void addFriendConnection(int ID_1,int ID_2){
+	boolean addFriendConnection(int ID_1,int ID_2){
 		
 		
 		ArrayList<Profile> tem_pList=Pmanager.get_Plist();
 		
 		Profile person1 = null;
 		Profile person2 = null;
+		
+		boolean success=false;
 		
 		//create a boolean to check repeat
 		boolean repeat=false;
@@ -49,10 +51,15 @@ public class ConnectionManager {
 		
 		//check whether the friend connection is valid by calling age check method 
 		if(age_Check(addConnect)==true) {c_list.add(addConnect);
+		
+		success=true;
 		}
 
 		else System.out.println("One of person in the connection is under valid age.");;
-		}
+		
+		return success;
+	
+	}
 	
 	
 	
@@ -60,8 +67,10 @@ public class ConnectionManager {
 	
 	
 	// add new parent connection by passing three IDs including parents and child
-    void addParentConnection(int ID_1,int ID_2,int ID_child){
+    boolean addParentConnection(int ID_1,int ID_2,int ID_child){
 	
+    	boolean success=false;
+    	
 	    ArrayList<Profile> tem_pList=Pmanager.get_Plist();
 		
 		
@@ -92,14 +101,18 @@ public class ConnectionManager {
 		//check whether the parent connection is valid by calling parent check method passing IDs of parents 
 		Parent_Connection addConnect=new Parent_Connection(person1,person2,child);
 		
-		if(parent_Check(addConnect)==true&&age_Check(addConnect)==true) {c_list.add(addConnect);
+		if(parent_Check(addConnect)==true&&age_Check(addConnect)==true) {
+			c_list.add(addConnect);
+			success=true;
 		}
+		
+		return success;
 }
 
     
     
     
-    void addCoupleConnection(int ID_1,int ID_2){
+    boolean addCoupleConnection(int ID_1,int ID_2){
     	
 	    ArrayList<Profile> tem_pList=Pmanager.get_Plist();
 		
@@ -108,6 +121,7 @@ public class ConnectionManager {
 		Profile person2 = null;
 		boolean repeat=false;
 		
+		boolean success=false;
 		
 		//get parents' and child's profiles from the profile list by checking their IDs 
 		for(int i=0;i<tem_pList.size();i++) {
@@ -126,7 +140,13 @@ public class ConnectionManager {
 		Couple_Connection addConnect=new Couple_Connection(person1,person2);
 		
 		if(couple_Check(addConnect)==false&&age_Check(addConnect)==true) {c_list.add(addConnect);
+		
+		success=true;
 		}
+		
+		return success;
+		
+		
 
 		
 	}
