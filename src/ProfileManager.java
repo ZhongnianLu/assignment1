@@ -8,18 +8,30 @@ import java.util.ArrayList;
 public class ProfileManager {
 	
 	// list of all profiles
-	ArrayList<Profile> p_list=new ArrayList<Profile>();
+	ArrayList<Profile> profiles=new ArrayList<Profile>();
 
 	public ArrayList<Profile> get_Plist(){
-		return p_list;
+		return profiles;
 	}
 	
 	
 	//method to add new profile in profile list
+	//sets the ID based on index in array
 	public void addProfile(Profile add) {
-		
-		p_list.add(add);
-		
-		
+		int ID = profiles.size();
+		add.setID(ID);
+		profiles.add(add);
 	}
+	
+	
+	public void removeProfile(Profile del) {
+		int index = profiles.indexOf(del);
+		profiles.remove(del);
+	}
+	
+	
+	
+	
+	
+	
 }

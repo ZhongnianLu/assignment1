@@ -10,6 +10,7 @@ public abstract class Connection {
 	
 	
 	
+	
 	public Connection(Profile person1, Profile person2) {
 		this.person1=person1;
 		this.person2=person2;

@@ -35,12 +35,12 @@ public class ConnectionManager {
 		
 		//get profiles from profile list with same ID as parameter 
 		for(int i=0;i<tem_pList.size();i++) {
-			if(tem_pList.get(i).getID()==ID_1||tem_pList.get(i).getID()==ID_2&&repeat==false) {
+			if((tem_pList.get(i).getID()==ID_1||tem_pList.get(i).getID()==ID_2)&&repeat==false) {
 				person1=tem_pList.get(i);
 				repeat=true;	
 			}
 			
-			if(tem_pList.get(i).getID()==ID_1||tem_pList.get(i).getID()==ID_2&&repeat==true) {
+			if((tem_pList.get(i).getID()==ID_1||tem_pList.get(i).getID()==ID_2)&&repeat==true) {
 				person2=tem_pList.get(i);
 			}
 			
