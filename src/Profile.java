@@ -6,6 +6,7 @@ public  class Profile {
 	 private int age;
 	 private int ID;
      int hhh;
+     int test;
 	 
 	 
     public Profile(String name,  String status, int age, int ID) {
