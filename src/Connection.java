@@ -56,5 +56,7 @@ public abstract class Connection {
 		
 		return repeat;
 	}
+	
+	public abstract String search(ArrayList<Connection> c_list, Profile target) ;
 
 }
