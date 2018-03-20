@@ -5,7 +5,7 @@ public  class Profile {
 	 private String status;
 	 private int age;
 	 private int ID;
-     
+     int hhh;
 	 
 	 
     public Profile(String name,  String status, int age, int ID) {
