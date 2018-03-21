@@ -2,21 +2,21 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
 public class MiniNet {
 	
-	//public static void main(String[] args) throws IOException 
-	//{
-		public static Database data = new Database(); //new data object with predefined data
-		public static ProfileManager profiles = new ProfileManager();  //new object to manage profile
-		public static ConnectionManager conns = new ConnectionManager(); //new object to manage connections
-		public static void main(String[] args) throws IOException 
-		{
-		profiles.importList(data.readProfiles()); //import the profiles from the data object to the profile manager
-		conns.importList(data.readConnections());
-		
+	public static Database data = new Database(); //new data object with predefined data
+	public static ProfileManager profiles = new ProfileManager();  //new object to manage profile
+	public static ConnectionManager conns = new ConnectionManager(); //new object to manage connections
+	
+	public static void main(String[] args) throws IOException 
+	{
+	profiles.importList(data.readProfiles()); //import the profiles from the data object to the profile manager
+	conns.importList(data.readConnections()); //import the connections from the data object to the connection manager
+	
 	
 	//ArrayList<Profile> profiles = new ArrayList<Profile>();
 	//ProfileManager Profiles = new ProfileManager();
@@ -44,11 +44,11 @@ public class MiniNet {
     else if( option == 3)
     	  addConnection(profiles, conns);    
     else if ( option == 4)
-			checkConnection();
+			checkConnection(profiles, conns);
 	else if ( option == 5)
-    	  findRelative();
+    	  findRelative(profiles, conns);
     else if (option == 6)
-    	deleteProfile(profiles);
+    	deleteProfile(profiles, conns);
 	}while(option != 0);
 
 	}
@@ -57,7 +57,7 @@ public class MiniNet {
 		
 		int option = 1; //initial option
 			try{System.out.println();
-				System.out.println("\n          MininNet ");
+				printInfo("MininNet");
 				System.out.println("-----------------------------");
 				String [] options =  {"Create Profile", "Select Profile", "Add Friend", "Check Friends", "Find Relatives", "Delete Profile", "Exit"};
 				int [] pids =  {1, 2, 3, 4, 5, 6, 0};  //creating arrays of numbers of the choices
@@ -71,9 +71,12 @@ public class MiniNet {
 				printInfo("Your Choice :");
 				option = scan.nextInt();
 				if (option >= 0 && option <=7){return option;} //if option is valid, return value
-				else {throw new IOException("\nInput invalid, must input corresponding number for selection.");}
+				else {throw new IOException("\nError: Input invalid, must input corresponding number for selection.");}
 				}  //if option is outside if range of choices throw exception
 			catch (IOException io) {System.out.println(io.getMessage());}
+			catch (InputMismatchException e) {System.out.println("\nError: Input must be a number");}
+			
+
 		return option;
 	}
 	
@@ -87,7 +90,7 @@ public class MiniNet {
 			
 			System.out.println("\nPlease enter your age : "); //enter age
 			int age = scan.nextInt();
-			if (age <= 0) throw new IOException("\nAge must be positve");
+			if (age <= 0) throw new IOException("\nError: Age must be positve");
 			
 			scan.nextLine();
 			System.out.println("Please enter a status update : ");   // enter a status
@@ -115,7 +118,7 @@ public class MiniNet {
 				}
 				else {
 					profiles.removeProfile(person);
-					throw new IOException("\nParents must be connected");
+					throw new IOException("\nError: Parents must be connected");
 				}
 			}
 		}
@@ -142,7 +145,7 @@ public class MiniNet {
 				System.out.println();
 				System.out.println("\nPlease enter your name : ");
 				name = scan.nextLine();
-				if (profiles.uniqueName(name) != true) throw new IOException("\nName must be unique");
+				if (profiles.uniqueName(name) != true) throw new IOException("\nError: Name must be unique");
 			}
 			catch (IOException ie){System.out.println(ie.getMessage());}
 		}while(profiles.uniqueName(name) != true);
@@ -160,12 +163,13 @@ public class MiniNet {
 	 		System.out.println("\nPlease select the profiles to connect");
 			printInfo("--First Profile--");
 			Profile person1 = selectProfile(tempList); //select first parent profile object
-			if (person1 == null) break;
+			if (person1 == null) throw new IOException ("\nError: Profile is null");
 			
 			tempList.removeProfile(person1);   //removes the selected profile from list
 			printInfo("--Second Profile--");
 			Profile person2 = selectProfile(tempList);
-			if (person2 == null) break;
+			if (person2 == null) throw new IOException ("\nError: Profile is null");
+			
 			
 			if (person1.getAge() < 16 || person2.getAge() < 16) {
 				
@@ -178,13 +182,13 @@ public class MiniNet {
 						done = true;
 					}
 				}
-				else throw new IOException ("Cannot connect, adult is not dependent's parent");
+				else throw new IOException ("\nError: Cannot connect, adult is not dependent's parent");
 			}
 			else {
 				connectionMenu(person1, person2, conns, profiles);
 				//conns.addFriendConnection(person1.getID(), person2.getID())
 			
-				System.out.println("Connection made");
+				System.out.println("\nConnection made");
 				done = true;
 			}
 			//else done = true;
@@ -259,7 +263,7 @@ public class MiniNet {
 	    else if ( option == 2)
 	    	if(conns.addCoupleConnection(pers1.getID(),  pers2.getID())) {
 	    		System.out.println("Connection made");
-	    	}else throw new IOException("Cannot connect: One or more persons is already coupled");
+	    	}else throw new IOException("\nError: One or more persons is already coupled");
 	    else if ( option == 3) {
 	    	createParent(pers1, pers2, profiles, conns);
 	    }
@@ -291,8 +295,8 @@ public class MiniNet {
  			//System.out.println("1"+parent1.getID() + "2"+ parent2.getID() + "3"+child.getID());
  			if(conns.addParentConnection(parent1.getID(), parent2.getID(), child.getID()))
  				System.out.println("\nProfile created");
- 			else throw new IOException("\nParents must be connected");
- 		}else throw new IOException("\nParents must be older than child");
+ 			else throw new IOException("\nError: Parents must be connected");
+ 		}else throw new IOException("\nError: Parents must be older than child");
  	}
  	
  	
@@ -315,9 +319,11 @@ public class MiniNet {
 			printInfo("Your Choice :");
 			option = scan.nextInt();
 			if (option >= 0 && option <=4){return option;} //if option is valid, return value
-			else {throw new IOException("Input invalid, must input corresponding number for selection.");}
+			else {throw new IOException("\nError: Input invalid, must input corresponding number for selection.");}
 			}  //if option is outside if range of choices throw exception
 		catch (IOException io) {System.out.println(io.getMessage());}
+		catch (InputMismatchException e) {System.out.println("\nError: Input must be a number");}
+		
 	return option;
  	}
  	
@@ -386,7 +392,7 @@ public class MiniNet {
  	}
  		
  		
- 	public static void printProfile(Profile prof, ProfileManager profiles, ConnectionManager conns) {
+ 	public static void printProfile(Profile prof, ProfileManager profiles, ConnectionManager conns) throws IOException {
  		System.out.println();
  		System.out.println();
  		System.out.println("=============================");
@@ -404,7 +410,7 @@ public class MiniNet {
  		profileMenu(prof, profiles, conns);
  	}
  	
- 	public static void profileMenu(Profile prof, ProfileManager profiles, ConnectionManager conns) {
+ 	public static void profileMenu(Profile prof, ProfileManager profiles, ConnectionManager conns) throws IOException {
  		int option;
 		do{
 		option = displayProfileMenu();
@@ -415,13 +421,13 @@ public class MiniNet {
 	    else if( option == 3)
 	    	  updateInfo(3, prof, profiles, conns);    
 	    else if (option == 5)
-	    	deleteProfile(prof, profiles);
+	    	deleteProfile(prof, profiles, conns);
 		break;
 		}while(option != 0);
  		
  	}
  	
- 	public static void updateInfo(int choice, Profile prof, ProfileManager profiles, ConnectionManager conns) {
+ 	public static void updateInfo(int choice, Profile prof, ProfileManager profiles, ConnectionManager conns) throws IOException {
  		String info;
  		if (choice == 1) {
  			info = "name";
@@ -452,7 +458,7 @@ public class MiniNet {
  		
  		int option = 1; //initialising option
 		try{System.out.println();
-			System.out.println("       Profile Menu");
+			printInfo("Profile Menu");
 			System.out.println("-----------------------------");
 			String [] options =  {"Update Name", "Update Image", "Update Status", "Delete Profile", "Exit to Main Menu"};
 			int [] pids =  {1, 2, 3, 4, 0};  //creating arrays of numbers of the choices
@@ -463,12 +469,15 @@ public class MiniNet {
 	
 			Scanner scan = new Scanner(System.in);
 			System.out.println("-----------------------------");
-			System.out.println("        Your Choice : ");
+			printInfo("Your Choice :");
 			option = scan.nextInt();
 			if (option >= 0 && option <=4){return option;} //if option is valid, return value
-			else {throw new IOException("Input invalid, must input corresponding number for selection.");}
+			else {throw new IOException("\nError: Input invalid, must input corresponding number for selection.");}
 			}  //if option is outside if range of choices throw exception
+		
+		catch (InputMismatchException e) {System.out.println("\nError: Input must be a number");}
 		catch (IOException io) {System.out.println(io.getMessage());}
+		
 	return option;
  	}
  	
@@ -513,7 +522,7 @@ public class MiniNet {
         return parts;
     }
  	
- 	public static int displayNames(ArrayList<Profile> plist) {
+ 	public static int displayNames(ArrayList<Profile> plist) throws IOException {
  		
  		int option = 1; //initialising option
 		try{//System.out.println();
@@ -537,12 +546,13 @@ public class MiniNet {
 	
 			Scanner scan = new Scanner(System.in);
 			System.out.println("-----------------------------");
-			System.out.println("        Your Choice : ");
+			printInfo("Your Choice :");
 			option = scan.nextInt();
-			if (option >= 0 && option <=names.size()){return option;} //if option is valid, return value
-			else {throw new IOException("Input invalid, must input corresponding number for selection.");}
+			if (option >= 0 && option <=names.size()){return option;}
+			else {throw new IOException("\nError: Input invalid, must input corresponding number for selection.");}
 			}  //if option is outside if range of choices throw exception
 		catch (IOException io) {System.out.println(io.getMessage());}
+		catch (InputMismatchException e) {System.out.println("\nError: Input must be a number");}
 		
 	return option;
  	}
@@ -558,26 +568,74 @@ public class MiniNet {
 				return names;
 			}
 				
-	public static void checkConnection() {
+	public static void checkConnection(ProfileManager profiles, ConnectionManager conns) throws IOException {
 		
-	}
-	
-	public static void findRelative() {
+		ProfileManager tempList = profiles;	
+			
+ 		System.out.println("\nPlease select the profiles to check");
+		printInfo("--First Profile--");
+		Profile person1 = selectProfile(tempList); //select first parent profile object
+		if (person1 == null) throw new IOException ("\nError: Profile is null");
 		
-	}
-	
-	
-    public static void deleteProfile(Profile prof, ProfileManager profiles) {
-    	//checks?
-    	//delete connections?
-    	profiles.removeProfile(prof);
-    	System.out.println("The profile has been deleted");
+		tempList.removeProfile(person1);   //removes the selected profile from list
+		printInfo("--Second Profile--");
+		Profile person2 = selectProfile(tempList);
+		if (person2 == null) throw new IOException ("\nError: Profile is null");
+		
+		ArrayList<Profile> friends = conns.search(person1);
+		boolean connected = false;
+		
+		for (int i = 0; i < friends.size(); i++) {
+			Profile temp = friends.get(i);
+			if (temp.equals(person2))
+				connected = true;
 		}
+		
+		if (connected)
+			System.out.println(person1.getName() + " is friends with " + person2.getName());
+		else
+			System.out.println(person1.getName() + " is not friends with " + person2.getName());
+		
+		
+	}
+	
+	public static void findRelative(ProfileManager profiles, ConnectionManager conns) throws IOException {
+		System.out.println("\nPlease select the profile");
+		Profile prof = selectProfile(profiles);
+		
+		ArrayList<Connection> family = getRelations(prof, conns);
+		
+		for (int i = 0; i < family.size(); i++) {
+			Connection con = family.get(i);
+			if(prof.equals(con.getChild()))
+				System.out.println(prof.getName() + " is a child of " + con.getPerson1().getName() + " and " + con.getPerson2().getName());
+			else 
+				System.out.println(prof.getName() + " is a parent of " + con.getChild().getName());
+		}
+		
+	}
+	
+	
+    public static void deleteProfile(Profile prof, ProfileManager profiles, ConnectionManager conns) throws IOException {
+    	ArrayList<Connection> friends = conns.search_clist(prof);
+    	boolean deleted = true;
+    	if(friends != null) {
+    		for(int i = 0; i < friends.size(); i++) {
+    			if(conns.get_Clist().remove(friends.get(i)) == false)
+    				deleted = false;
+    		}
+    	}
+     	
+    	if(deleted) {
+    		profiles.removeProfile(prof);
+        	System.out.println("The profile has been deleted");
+    	} else throw new IOException("\nError: Unable to delete all friends. Deletion cancelled.");
+    }
     
-    public static void deleteProfile(ProfileManager profiles) throws IOException {
+    public static void deleteProfile(ProfileManager profiles, ConnectionManager conns) throws IOException {
     	Profile prof = selectProfile(profiles);
- 		if (prof != null)
- 		deleteProfile(prof, profiles);
+    	if (prof != null)
+ 		deleteProfile(prof, profiles, conns);
     }
 			
 		
