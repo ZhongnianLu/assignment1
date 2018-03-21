@@ -34,10 +34,10 @@ public class Database {
 	public ArrayList<Connection> readConnections(){		
 		System.out.println("returned conns");
 		conns.add(new Friend_Connection(Bob, Mary));
-		conns.add(new Friend_Connection(Bob, James));
+		conns.add(new Friend_Connection(Lisa, James));
 		conns.add(new Couple_Connection(James, Mary));
 		conns.add(new Parent_Connection(Bob, Mary, Veronica));
-		conns.add(new Parent_Connection(James, Mary, Evan));
+		conns.add(new Parent_Connection(James,Lisa, Evan));
 		return conns;
 	}
 	
