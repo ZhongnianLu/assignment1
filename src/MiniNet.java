@@ -99,7 +99,7 @@ public class MiniNet {
 			//System.out.println("Please enter a status update : ");   // enter a status
 			
 			
-			Profile person = new Adult(name, status, age); //create a profile object
+			Profile person = new Profile(name, status, age); //create a profile object
 			//person.setID(profiles.get_Plist().size()+1); //set ID based on number of profiles
 			profiles.addProfile(person);
 			
