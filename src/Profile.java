@@ -1,6 +1,6 @@
 //import java.util.ArrayList;
 
-public abstract class Profile {
+public class Profile {
 	
 	private String name;
 	private String image;
