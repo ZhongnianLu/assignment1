@@ -41,9 +41,11 @@ public class ProfileManager {
 	// checks if a given name is unique among the profiles, return true means it is unique
 	public boolean uniqueName(String name) {
 		boolean unique = true;
+		name = name.toLowerCase();
 		
 		for (int i = 0; i < this.get_Plist().size(); i++) { //iterates over all profile objects
-			if (name.equals(this.get_Plist().get(i))) {     //checks if names match
+			String str = this.get_Plist().get(i).getName().toLowerCase();
+			if (name.equals(str)) {     //checks if names match
 				unique = false;
 			}
 		}

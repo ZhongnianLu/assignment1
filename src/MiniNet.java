@@ -83,18 +83,19 @@ public class MiniNet {
 		
 		String name = enterName(profiles); // method for entering age
 		
-		try {
-				
-			String status;
-			
+		try {			
 			Scanner scan = new Scanner(System.in);
 			
 			System.out.println("Please enter your age : "); //enter age
 			int age = scan.nextInt();
 			if (age <= 0) throw new IOException("Age must be positve");
 			
+			scan.nextLine();
 			System.out.println("Please enter a status update : ");   // enter a status
-			status = scan.nextLine();
+			String status = scan.nextLine();
+			
+			System.out.println("Please enter a status update : ");   // enter a status
+			
 			
 			Profile person = new Adult(name, status, age); //create a profile object
 			//person.setID(profiles.get_Plist().size()+1); //set ID based on number of profiles
@@ -133,7 +134,7 @@ public class MiniNet {
 		String name = "name";
 		do {
 			try {
-		
+				System.out.println();
 				System.out.println("Please enter your name : ");
 				name = scan.nextLine();
 				if (profiles.uniqueName(name) != true) throw new IOException("Name must be unique");
@@ -144,7 +145,18 @@ public class MiniNet {
 	}
 	
 	
- 	public static void addConnection(){
+ 	public static void addConnection(ProfileManager profiles, ConnectionManager conns) throws IOException{
+ 		
+ 		ProfileManager tempList = profiles;
+		
+ 		System.out.println("Please select the profiles to connect");
+		printInfo("--First Profile--");
+		Profile person1 = selectProfile(tempList); //select first parent profile object
+		tempList.removeProfile(person1);   //removes the selected profile from list
+		printInfo("--Second Profile--");
+		Profile person2 = selectProfile(tempList);
+		
+		
 			//search names
  		//select first profile
  		//search again to select second profile
@@ -223,6 +235,8 @@ public class MiniNet {
  		
  		
  	public static void printProfile(Profile prof, ProfileManager profiles) {
+ 		System.out.println();
+ 		System.out.println();
  		System.out.println("=============================");
  		printInfo(prof.getImage());
  		System.out.println("=============================");
@@ -355,7 +369,7 @@ public class MiniNet {
  		
  		int option = 1; //initialising option
 		try{System.out.println();
-			System.out.println("      Search Results :      ");
+			printInfo("Select a Profile");
 			System.out.println("-----------------------------");
 			ArrayList<String> names = listNames(plist);
 			names.add("Exit to Main Menu");
