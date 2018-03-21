@@ -6,6 +6,8 @@ public class Parent_Connection extends Connection {
 	// difference between parent relationship and friend relationship is child profile
 	Profile child;
 	
+	ArrayList<Profile> linked_person;
+	
 	public Parent_Connection(Profile person1, Profile person2, Profile child) {
 		super(person1, person2);
 		
@@ -17,10 +19,22 @@ public class Parent_Connection extends Connection {
 	}
 	
 	
+	public  ArrayList<Profile> getProfileInside(){
+		
+		linked_person.add(getPerson1());
+		
+		linked_person.add(getPerson2());
+
+		linked_person.add(getChild());
+		
+		return linked_person;
+	} 
+	
+	
 
 	public boolean check(ArrayList<Connection> c_list) {
 		
-		boolean parent_check=false;
+		boolean success=false;
 		
 		
 		for(int i=0;i<c_list.size();i++) {
@@ -46,14 +60,28 @@ public class Parent_Connection extends Connection {
 			
 			//check whether the connection we found is a friend connection
 			if(c_list.get(i) instanceof Couple_Connection&&connection_check==true) {
-				parent_check=true;
+				success=true;
 			}
 		}
 		
-		return parent_check;
+		return success;
 		
 	}
-	
+
+	/*
+	public String search(Profile target) {
+
+
+		String screen=null;
+
+			if(getPerson1().getID()==target.getID()||getPerson2().getID()==target.getID()||getChild().getID()==target.getID()) {
+				screen+="\n<Parent>  "+getPerson1().getName()+" --- "+getPerson2().getName()+" <Child> "+getChild().getName();
+			}
+		
+		return screen;
+		
+	}
+*/
 	
 
 }

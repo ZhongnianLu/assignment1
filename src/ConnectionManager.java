@@ -35,6 +35,9 @@ public class ConnectionManager {
 		
 		//get profiles from profile list with same ID as parameter 
 		for(int i=0;i<tem_pList.size();i++) {
+			
+			
+			
 			if((tem_pList.get(i).getID()==ID_1||tem_pList.get(i).getID()==ID_2)&&repeat==false) {
 				person1=tem_pList.get(i);
 				repeat=true;	
@@ -140,7 +143,7 @@ public class ConnectionManager {
 		//check whether the parent connection is valid by calling parent check method passing IDs of parents 
 		Couple_Connection addConnect=new Couple_Connection(person1,person2);
 		
-		if((addConnect.check(c_list)==false)&&addConnect.repeat_check(c_list)==false ){c_list.add(addConnect);
+		if((addConnect.check(c_list)==true)&&addConnect.repeat_check(c_list)==false ){c_list.add(addConnect);
 		
 		success=true;
 		}
@@ -161,6 +164,20 @@ public class ConnectionManager {
 		return c_list;
 	}
 	
+    
+    /*public String search(Profile target) {  	
+
+		String screen=null;
+		
+		for(int i=0;i<c_list.size();i++) {
+			
+			System.out.println(c_list.get(i).search(target));
+
+		}
+		return screen;
+		
+		
+    }*/
 	
 	
 	

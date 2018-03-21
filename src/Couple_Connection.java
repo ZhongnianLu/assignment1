@@ -11,7 +11,7 @@ public class Couple_Connection extends Connection{
 	public boolean check(ArrayList<Connection> c_list) {
 
 		
-		boolean couple_repeat=false;
+		boolean success=true;
 		
 		
 		
@@ -28,18 +28,33 @@ public class Couple_Connection extends Connection{
 			
 			if(c_list.get(i) instanceof Couple_Connection) {
 			if(person_x.getID()==getPerson1().getID()||person_y.getID()==getPerson2().getID()) {
-				couple_repeat=true;
+				success=false;
 			}
 			
 			if(person_x.getID()==getPerson2().getID()||person_y.getID()==getPerson1().getID()) {
-				couple_repeat=true;
+				success=false;
 			}
 			}
 			}
 		
 		
-		return couple_repeat;
-	}	
+		return success;
+	}
+
+
+	/*@Override
+	public String search(Profile target) {
+
+
+		String screen=null;
+
+			if(getPerson1().getID()==target.getID()||getPerson2().getID()==target.getID()) {
+				screen+="\n<Couple>  "+getPerson1().getName()+" --- "+getPerson2().getName();
+			}
+		
+		return screen;
+		
+	}	*/
 	}
 
 	

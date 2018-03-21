@@ -8,6 +8,8 @@ public abstract class Connection {
 	private Profile person1;
 	private Profile person2;
 	
+	private ArrayList<Profile> linked_person;
+	
 	
 	
 	
@@ -57,6 +59,20 @@ public abstract class Connection {
 		return repeat;
 	}
 	
-	public abstract String search(ArrayList<Connection> c_list, Profile target) ;
+	public  ArrayList<Profile> getProfileInside(){
+		
+		linked_person.add(person1);
+		
+		linked_person.add(person2);
+
+		
+		return linked_person;
+	} 
+	
+	
+	//public abstract String search(Profile target);
+		
+	
+
 
 }
