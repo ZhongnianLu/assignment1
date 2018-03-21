@@ -49,15 +49,18 @@ public  class Friend_Connection extends Connection{
 	}
 
 	/*@Override
-	public String search(Profile target) {  	
+	public ArrayList<Profile> search(Profile target) {  	
 
-		String screen=null;
-
+		ArrayList<Profile> contain=new ArrayList<Profile>();
+		
+		
+		    if(getProfileInside().get())
+		
 			if(getPerson1().getID()==target.getID()||getPerson2().getID()==target.getID()) {
 				screen+="\n<Friend>  "+getPerson1().getName()+" --- "+getPerson2().getName();
 			}
 		
-		return screen;
+		return contain;
 		
 		
     }*/
