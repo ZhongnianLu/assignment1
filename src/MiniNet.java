@@ -97,7 +97,9 @@ public class MiniNet {
 			status = scan.nextLine();
 			
 			Profile person = new Adult(name, status, age); //create a profile object
-			person.setID(profiles.get_Plist().size()+1); //set ID based on number of profiles
+			//person.setID(profiles.get_Plist().size()+1); //set ID based on number of profiles
+			profiles.addProfile(person);
+			
 			
 			if (age > 0 && age < 16) {					//if profile holder is a dependent
 				ProfileManager tempList = profiles;
@@ -113,10 +115,13 @@ public class MiniNet {
 				printInfo("--Second Parent--");
 				Profile parent2 = selectProfile(tempList);
 				if(Conns.addParentConnection(parent1.getID(), parent2.getID(), person.getID())) {
-					profiles.addProfile(person);
+					//profiles.addProfile(person);
 					System.out.println("Profile created");
 				}
-				else throw new IOException("Parents must be connected");
+				else {
+					profiles.removeProfile(person);
+					throw new IOException("Parents must be connected");
+				}
 			}
 		}
 		catch (IOException ie){System.out.println(ie.getMessage());}

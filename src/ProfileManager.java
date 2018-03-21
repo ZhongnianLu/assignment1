@@ -10,6 +10,7 @@ public class ProfileManager {
 	// list of all profiles
 	ArrayList<Profile> profiles=new ArrayList<Profile>();
 
+	
 	public ArrayList<Profile> get_Plist(){
 		return profiles;
 	}
@@ -17,6 +18,8 @@ public class ProfileManager {
 	
 	//method to add new profile in profile list
 	public void addProfile(Profile add) {
+		int ID = this.get_Plist().size() + 1;
+		add.setID(ID);
 		profiles.add(add);
 	}
 	
