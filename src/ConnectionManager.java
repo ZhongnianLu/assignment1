@@ -86,12 +86,12 @@ public class ConnectionManager {
 		
 		//get parents' and child's profiles from the profile list by checking their IDs 
 		for(int i=0;i<tem_pList.size();i++) {
-			if(tem_pList.get(i).getID()==ID_1||tem_pList.get(i).getID()==ID_2&&repeat==false) {
+			if((tem_pList.get(i).getID()==ID_1||tem_pList.get(i).getID()==ID_2)&&repeat==false) {
 				person1=tem_pList.get(i);
 				repeat=true;	
 			}
 			
-			if(tem_pList.get(i).getID()==ID_1||tem_pList.get(i).getID()==ID_2&&repeat==true) {
+			if((tem_pList.get(i).getID()==ID_1||tem_pList.get(i).getID()==ID_2)&&repeat==true) {
 				person2=tem_pList.get(i);
 			}
 			
@@ -129,12 +129,12 @@ public class ConnectionManager {
 		
 		//get parents' and child's profiles from the profile list by checking their IDs 
 		for(int i=0;i<tem_pList.size();i++) {
-			if(tem_pList.get(i).getID()==ID_1||tem_pList.get(i).getID()==ID_2&&repeat==false) {
+			if((tem_pList.get(i).getID()==ID_1||tem_pList.get(i).getID()==ID_2)&&repeat==false) {
 				person1=tem_pList.get(i);
 				repeat=true;	
 			}
 			
-			if(tem_pList.get(i).getID()==ID_1||tem_pList.get(i).getID()==ID_2&&repeat==true) {
+			if((tem_pList.get(i).getID()==ID_1||tem_pList.get(i).getID()==ID_2)&&repeat==true) {
 				person2=tem_pList.get(i);
 			}
 			};
@@ -165,19 +165,35 @@ public class ConnectionManager {
 	}
 	
     
-    /*public String search(Profile target) {  	
+    public ArrayList<Profile> search(Profile target) {  	
 
-		String screen=null;
+    	
+		ArrayList<Profile> contain=new ArrayList<Profile>();
 		
 		for(int i=0;i<c_list.size();i++) {
 			
-			System.out.println(c_list.get(i).search(target));
+			for(int j=0;j<c_list.get(j).in(target).size();j++) {
+				
+		    	boolean repeat=false;
+
+				
+				for(int k=0;k<contain.size();k++) {
+					
+					if(contain.get(k).getID()==target.getID()) {
+						repeat=true;
+	
+						
+				if(repeat==false)contain.add(c_list.get(j).getProfileInside().get(j));		
+					}
+					
+				}
+			};
 
 		}
-		return screen;
+		return contain;
 		
 		
-    }*/
+    }
 	
 	
 	
