@@ -13,7 +13,6 @@ public abstract class Profile {
 		this.image = "default.png";
 		this.status = status;
 		this.age = age;
-		this.ID=ID;
 	}
 	
 	public Profile (String name, int age) {
@@ -61,9 +60,7 @@ public abstract class Profile {
 	public void setID(int ID) {
 		this.ID=ID;
 	}
-	//public void setAge(int age) {
-		//this.age = age;
-	//}
+	
 	
 	
 	
