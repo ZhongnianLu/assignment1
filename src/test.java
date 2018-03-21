@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /*
  * This class is a test class with a main method to test all methods 
  * 
@@ -8,14 +10,14 @@ public class test {
 	public static void main(String[] args) {
 		
 		//create five new instances of profiles
-		Profile p1=new Adult("A","Work",1,101);//0
-		Profile p2=new Adult("B","Work",2,102);//1
-		Profile p3=new Adult("C","Work",4,103);//2
-		Profile p4=new Adult("D","Work",7,104);//3
-		Profile p5=new Adult("E","Home",27,105);//4
-		Profile p6=new Adult("F","Home",24,106);//5
-		Profile p7=new Adult("G","Work",29,102);//6
-		Profile p8=new Adult("H","Work",29,102);//6
+		Profile p1=new Adult("A","Work",1);//0
+		Profile p2=new Adult("B","Work",2);//1
+		Profile p3=new Adult("C","Work",4);//2
+		Profile p4=new Adult("D","Work",7);//3
+		Profile p5=new Adult("E","Home",27);//4
+		Profile p6=new Adult("F","Home",24);//5
+		Profile p7=new Adult("G","Work",29);//6
+		Profile p8=new Adult("H","Work",29);//7
 
 
 		
@@ -42,6 +44,7 @@ public class test {
 		test_MP.addProfile(p7);
 		
 		test_MP.addProfile(p8);
+		
 
 
 
@@ -55,43 +58,51 @@ public class test {
 		
 		// create new ConnectionManager object to access all connections and methods
 		ConnectionManager test_MC=new ConnectionManager();
+		
+		test_MC.Pmanager=test_MP;
+		
+
+		
+		if(test_MC.addFriendConnection(5,6)==true) {
+			System.out.println("Success");
+		}else{System.out.println("Fails");};
 
 		
 		
 		// input all profiles from profile manager to connection manager
-		test_MC.Pmanager=test_MP;
 		
 		
 		
 		/*
-		 * Profile p1=new Adult("A","Work",1,101);//0
-		Profile p2=new Adult("B","Work",1,102);//1
-		Profile p3=new Adult("C","Work",14,103);//2
-		Profile p4=new Adult("D","Work",16,104);//3
-		Profile p5=new Adult("E","Home",27,105);//4
-		Profile p6=new Adult("F","Home",24,106);//5
-		Profile p7=new Adult("G","Work",29,102);//6
-				Profile p8=new Adult("H","Work",29,102);//7
+		 * 
+		Profile p1=new Adult("A","Work",1);//0
+		Profile p2=new Adult("B","Work",2);//1
+		Profile p3=new Adult("C","Work",4);//2
+		Profile p4=new Adult("D","Work",7);//3
+		Profile p5=new Adult("E","Home",27);//4
+		Profile p6=new Adult("F","Home",24);//5
+		Profile p7=new Adult("G","Work",29);//6
+		Profile p8=new Adult("H","Work",29);//7
 
 		
 
 		 * 
 		 */	
 		//try to add new connections 
-		test_MC.addFriendConnection(004, 005);
+		test_MC.addFriendConnection(006, 005);
 		
 		test_MC.addFriendConnection(005, 007);
 
 		
-		test_MC.addCoupleConnection(004, 005);
+		test_MC.addCoupleConnection(005, 006);
 		
-		test_MC.addCoupleConnection(006, 007);
+		test_MC.addCoupleConnection(7, 8);
 		
-		test_MC.addParentConnection(004, 005, 1);
+		test_MC.addParentConnection(006, 005, 1);
 		
-		test_MC.addParentConnection(006, 007, 2);
+		test_MC.addParentConnection(8, 007, 2);
 		
-		test_MC.addFriendConnection(003, 002);
+		test_MC.addFriendConnection(003, 004);
 
 		
 
@@ -140,7 +151,18 @@ public class test {
 				
 			}
 		
+		ArrayList<Profile> search_list=test_MC.search(p1);
 		
+		System.out.println(test_MC.get_Clist().get(0).in(p3));
+		
+		for(int i=0;i<search_list.size();i++) {
+	
+			System.out.print(search_list.get(i).getName());
+			
+			
+		
+		}
+		}
 		
 	
 		
@@ -148,4 +170,4 @@ public class test {
 		
 	}
 
-}
+

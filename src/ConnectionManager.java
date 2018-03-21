@@ -10,13 +10,13 @@ import java.util.ArrayList;
  */
 
 public class ConnectionManager {
+	
 
 	//Access list of connections
 	ArrayList<Connection> c_list=new ArrayList<Connection>();
 	
 	//Provide an instance of Profile manager to access profile list
 	ProfileManager Pmanager;	
-	
 	
 	
 	//Method to create a friend connection
@@ -36,8 +36,6 @@ public class ConnectionManager {
 		//get profiles from profile list with same ID as parameter 
 		for(int i=0;i<tem_pList.size();i++) {
 			
-			
-			
 			if((tem_pList.get(i).getID()==ID_1||tem_pList.get(i).getID()==ID_2)&&repeat==false) {
 				person1=tem_pList.get(i);
 				repeat=true;	
@@ -49,8 +47,8 @@ public class ConnectionManager {
 			
 		};
 		
-		//create a new connection with selected profiles
 		
+		//create a new connection with selected profiles
 		Friend_Connection addConnect=new Friend_Connection(person1,person2);
 		
 		//check whether the friend connection is valid by calling age check method 
@@ -64,9 +62,6 @@ public class ConnectionManager {
 		return success;
 	
 	}
-	
-	
-	
 	
 	
 	
@@ -115,6 +110,7 @@ public class ConnectionManager {
 
     
     
+	// add new couple connection by passing two IDs
     
     boolean addCoupleConnection(int ID_1,int ID_2){
     	
@@ -149,11 +145,7 @@ public class ConnectionManager {
 		}
 		
 		return success;
-		
-		
-
-		
-	}
+		}
 
     
     
@@ -165,38 +157,44 @@ public class ConnectionManager {
 	}
 	
     
+    
+    //Method to create a array list of profiles connected to a target person
     public ArrayList<Profile> search(Profile target) {  	
 
-    	
 		ArrayList<Profile> contain=new ArrayList<Profile>();
 		
 		for(int i=0;i<c_list.size();i++) {
 			
-			for(int j=0;j<c_list.get(j).in(target).size();j++) {
+		Connection tem = c_list.get(i);	
+			
+		if(tem.in(target)==true) {
+			
+		if((profile_repeat(tem.getPerson1(), contain)==false)&&tem.getPerson1().getID()!=target.getID())contain.add(tem.getPerson1());	
+		if((profile_repeat(tem.getPerson2(), contain)==false)&&tem.getPerson2().getID()!=target.getID())contain.add(tem.getPerson2());	
+		
+		if(tem instanceof Parent_Connection) {
 				
-		    	boolean repeat=false;
-
-				
-				for(int k=0;k<contain.size();k++) {
-					
-					if(contain.get(k).getID()==target.getID()) {
-						repeat=true;
-	
-						
-				if(repeat==false)contain.add(c_list.get(j).getProfileInside().get(j));		
-					}
-					
-				}
-			};
-
-		}
+			if((profile_repeat(tem.getChild(), contain)==false)&&tem.getPerson1().getID()!=target.getID())contain.add(c_list.get(i).getChild());
+		
+		}}
+	    }
+		
 		return contain;
-		
-		
+}
+
+    
+    
+    // Checking tool to help search method above: identify if a profile already included in the result of search
+    public boolean profile_repeat(Profile target, ArrayList<Profile> check_plist) {
+    	boolean repeat=false;
+    	
+    	for(int i=0;i<check_plist.size();i++) {
+    		if(check_plist.get(i).getID()==target.getID()) repeat=true;
+    	}
+    	
+    	return repeat;
     }
-	
-	
-	
+
 }
     
 	

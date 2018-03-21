@@ -30,8 +30,9 @@ public class Parent_Connection extends Connection {
 		return linked_person;
 	} 
 	
-	
 
+	
+    // Check whether added parent is valid or not
 	public boolean check(ArrayList<Connection> c_list) {
 		
 		boolean success=false;
@@ -65,23 +66,21 @@ public class Parent_Connection extends Connection {
 		}
 		
 		return success;
-		
-	}
+		}
 
-	/*
-	public String search(Profile target) {
-
-
-		String screen=null;
-
-			if(getPerson1().getID()==target.getID()||getPerson2().getID()==target.getID()||getChild().getID()==target.getID()) {
-				screen+="\n<Parent>  "+getPerson1().getName()+" --- "+getPerson2().getName()+" <Child> "+getChild().getName();
-			}
-		
-		return screen;
-		
-	}
-*/
 	
+	
+	
+    // Due to the child is extra to normal connection, this method check three profiles in parent connection and override method in super class.
+	public  boolean in (Profile target){
+		
+		boolean in=false;
+		
+		if(getPerson1().getID()==target.getID()||getPerson2().getID()==target.getID()||getChild().getID()==target.getID()) {
+			in=true;
+		}		
+		return in;
+		
+		};
 
 }

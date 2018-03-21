@@ -38,16 +38,18 @@ public abstract class Connection {
 
 	public abstract boolean check(ArrayList<Connection> c_list) ;
 	
+	
+	//Check whether this connection already added in the connection list
 	public boolean repeat_check(ArrayList<Connection> c_list) {
 		
 		boolean repeat=false;
 		
 		for(int i=0;i<c_list.size();i++) {
+			
 			if(c_list.get(i).getPerson1().getID()==getPerson1().getID() &&c_list.get(i).getPerson2().getID()==getPerson2().getID()&&c_list.get(i).getClass().equals(getClass())){
 				repeat=true;
 				System.out.println("Repeated");
 			}
-			
 			if(c_list.get(i).getPerson2().getID()==getPerson1().getID() &&c_list.get(i).getPerson1().getID()==getPerson2().getID()&&c_list.get(i).getClass().equals(getClass())){
 				repeat=true;
 				System.out.println("Repeated");
@@ -64,13 +66,11 @@ public abstract class Connection {
 	public  ArrayList<Profile> getProfileInside(){
 		
 		 ArrayList<Profile> linked_person=new ArrayList<Profile>();
-
 		
 		linked_person.add(getPerson1());
 		
 		linked_person.add(getPerson2());
 
-		
 		return linked_person;
 	} 
 	
@@ -78,26 +78,18 @@ public abstract class Connection {
 	
 	
 	
-	public  ArrayList<Profile> in (Profile target){
-		
-	ArrayList<Profile> contain=new ArrayList<Profile>();	
 	
-	    boolean in=false;
+	//Serve the search function: check whether the target profile is in this connection
+	public  boolean in (Profile target){
+		
+	boolean in=false;
 	
-		for(int i=0;i<getProfileInside().size();i++) {
-			if(getProfileInside().get(i).getID()==target.getID()) {
-				in=true;
-			}
-		}
-		
-		
-		for(int i=0;i<getProfileInside().size();i++) {
-			if(getProfileInside().get(i).getID()!=target.getID()&&in==true) {
-				contain.add(getProfileInside().get(i));
-			}
-		}
-		return contain;
+	if(getPerson1().getID()==target.getID()||getPerson2().getID()==target.getID()) {
+		in=true;
+	}
 
+	return in;
+	
 	};
 		
 	
