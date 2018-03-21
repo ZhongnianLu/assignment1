@@ -39,7 +39,7 @@ public class MiniNet {
 	do{
 	option = display_menu();
 	if ( option == 1 )
-          addProfile(Profiles);
+          addProfile(Profiles, Conns);
     else if ( option == 2)
     	displayProfile(Profiles);
     else if( option == 3)
@@ -79,7 +79,7 @@ public class MiniNet {
 	}
 	
 	
-	public static void addProfile(ProfileManager profiles) throws IOException{
+	public static void addProfile(ProfileManager profiles, ConnectionManager Conns) throws IOException{
 		
 		String name = enterName(profiles); // method for entering age
 		
@@ -112,7 +112,7 @@ public class MiniNet {
 				tempList.removeProfile(parent1);   //removes the selected profile from list
 				printInfo("--Second Parent--");
 				Profile parent2 = selectProfile(tempList);
-				if(addParentConnection(parent1.getID(), parent2.getID(), person.getID())) {
+				if(Conns.addParentConnection(parent1.getID(), parent2.getID(), person.getID())) {
 					profiles.addProfile(person);
 					System.out.println("Profile created");
 				}
