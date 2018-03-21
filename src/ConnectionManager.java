@@ -181,6 +181,22 @@ public class ConnectionManager {
 		
 		return contain;
 }
+    
+    //Method to create a connection list of profiles connected to a target person
+    public ArrayList<Connection> search_clist(Profile target) {  	
+
+		ArrayList<Connection> contain=new ArrayList<Connection>();
+				
+		for(int i=0;i<c_list.size();i++) {
+		
+		 Connection tem = c_list.get(i);	
+			
+		 if(tem.in(target)==true) {contain.add(tem);}
+	     }
+		
+		return contain;
+}
+    
 
     
     
