@@ -5,6 +5,7 @@ public class Adult extends Profile {
 		super(name, status, age);
 	}
 	
+	
 	public Adult (String name, int age) {
 		super(name, age);
 		
