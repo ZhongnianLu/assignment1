@@ -6,7 +6,7 @@ public class Parent_Connection extends Connection {
 	// difference between parent relationship and friend relationship is child profile
 	Profile child;
 	
-	ArrayList<Profile> linked_person;
+	ArrayList<Profile> linked_person=new ArrayList<Profile>();
 	
 	public Parent_Connection(Profile person1, Profile person2, Profile child) {
 		super(person1, person2);
