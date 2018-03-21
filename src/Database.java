@@ -12,8 +12,8 @@ public class Database {
 		Profile James = new Adult("James", "BMW 05", 90);
 		Profile Mary = new Adult("Mary", "Holden 03", 60);
 		Profile Lisa = new Adult("Lisa", "Camry 04", 65);
-		Profile Evan = new Child("Evan", "Jaguar 06", 12, Bob, Mary);
-		Profile Veronica = new Child("Veronica", "Subaru 02", 6, James, Lisa);
+		Profile Evan = new Child("Evan", "Jaguar 06", 12);
+		Profile Veronica = new Child("Veronica", "Subaru 02", 6);
 		profiles.add(Bob);
 		profiles.add(James);
 		profiles.add(Mary);
