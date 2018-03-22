@@ -6,21 +6,27 @@ import java.util.ArrayList;
  * 
  * This class contains all methods to add different types of new connection.
  * 
- * This class contains all methods to check whether new connection is valid or not: age check for friend & parent check for child
+ * This class contains all methods to check whether new connection is valid or not: 
+ * 
  */
 
 public class ConnectionManager {
 	
 
 	//Access list of connections
-	ArrayList<Connection> c_list=new ArrayList<Connection>();
+	private ArrayList<Connection> c_list=new ArrayList<Connection>();
 	
 	//Provide an instance of Profile manager to access profile list
 	ProfileManager Pmanager;	
 	
 	
+    public void addConnection(Connection target){
+		c_list.add(target);
+	}
+	
+	
 	//Method to create a friend connection
-	boolean addFriendConnection(int ID_1,int ID_2){
+	public boolean addFriendConnection(int ID_1,int ID_2){
 		
 		
 		ArrayList<Profile> tem_pList=Pmanager.get_Plist();
@@ -52,7 +58,8 @@ public class ConnectionManager {
 		Friend_Connection addConnect=new Friend_Connection(person1,person2);
 		
 		//check whether the friend connection is valid by calling age check method 
-		if(addConnect.check(c_list)==true&&addConnect.repeat_check(c_list)==false) {c_list.add(addConnect);
+		if(addConnect.check(c_list)==true&&addConnect.repeat_check(c_list)==false) {
+			c_list.add(addConnect);
 		
 		success=true;
 		}
@@ -111,7 +118,6 @@ public class ConnectionManager {
     
     
 	// add new couple connection by passing two IDs
-    
     boolean addCoupleConnection(int ID_1,int ID_2){
     	
 	    ArrayList<Profile> tem_pList=Pmanager.get_Plist();
@@ -139,7 +145,8 @@ public class ConnectionManager {
 		//check whether the parent connection is valid by calling parent check method passing IDs of parents 
 		Couple_Connection addConnect=new Couple_Connection(person1,person2);
 		
-		if((addConnect.check(c_list)==true)&&addConnect.repeat_check(c_list)==false ){c_list.add(addConnect);
+		if((addConnect.check(c_list)==true)&&addConnect.repeat_check(c_list)==false ){
+			c_list.add(addConnect);
 		
 		success=true;
 		}
@@ -169,18 +176,26 @@ public class ConnectionManager {
 			
 		if(tem.in(target)==true) {
 			
-		if((profile_repeat(tem.getPerson1(), contain)==false)&&tem.getPerson1().getID()!=target.getID())contain.add(tem.getPerson1());	
-		if((profile_repeat(tem.getPerson2(), contain)==false)&&tem.getPerson2().getID()!=target.getID())contain.add(tem.getPerson2());	
+		if((profile_repeat(tem.getPerson1(), contain)==false)&&tem.getPerson1().getID()!=target.getID()) {
+			contain.add(tem.getPerson1());	
+		}
+		if((profile_repeat(tem.getPerson2(), contain)==false)&&tem.getPerson2().getID()!=target.getID()) {
+			contain.add(tem.getPerson2());	
+		}
 		
 		if(tem instanceof Parent_Connection) {
 				
-			if((profile_repeat(tem.getChild(), contain)==false)&&tem.getPerson1().getID()!=target.getID())contain.add(c_list.get(i).getChild());
+			if((profile_repeat(tem.getChild(), contain)==false)&&tem.getPerson1().getID()!=target.getID()) {
+				contain.add(c_list.get(i).getChild());
+			}
 		
 		}}
 	    }
 		
 		return contain;
 }
+    
+    
     
     //Method to create a connection list of profiles connected to a target person
     public ArrayList<Connection> search_clist(Profile target) {  	
@@ -210,6 +225,18 @@ public class ConnectionManager {
     	
     	return repeat;
     }
+
+
+
+	public void importList(ArrayList<Connection> readConnections) {
+	
+		int len = readConnections.size();
+		
+		for (int i = 0; i < len; i++) {
+			this.addConnection(readConnections.get(i));
+		}
+		
+	}
 
 }
     
