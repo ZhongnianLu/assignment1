@@ -9,7 +9,10 @@ import java.util.Scanner;
 
 public class MiniNet {
 	
-	MiniNet network = new MiniNet();	
+	public static void main(String[] args) {
+	
+	MiniNet network = new MiniNet();
+	}
 
 
 }
