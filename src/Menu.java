@@ -15,6 +15,7 @@ public class Menu {
 	{
 	profiles.importList(data.readProfiles()); //import the profiles from the data object to the profile manager
 	conns.importList(data.readConnections()); //import the connections from the data object to the connection manager
+	conns.Pmanager = profiles;
 		
 	int option;
 	do{
