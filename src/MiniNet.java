@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class MiniNet {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 	
 	Menu network = new Menu();
 	network.getMenu();
