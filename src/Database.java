@@ -35,9 +35,9 @@ public class Database {
 		//System.out.println("returned conns");
 		conns.add(new Friend_Connection(Bob, Mary));
 		conns.add(new Friend_Connection(Lisa, James));
-		conns.add(new Couple_Connection(James, Mary));
-		conns.add(new Parent_Connection(Bob, Mary, Veronica));
-		conns.add(new Parent_Connection(James,Lisa, Evan));
+		//conns.add(new Couple_Connection(James, Mary));
+		conns.add(new Parent_Connection(Bob, lisa, Veronica));
+		conns.add(new Parent_Connection(James,Mary, Evan));
 		return conns;
 	}
 	
