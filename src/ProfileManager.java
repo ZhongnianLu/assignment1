@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 /*
@@ -18,8 +19,6 @@ public class ProfileManager {
 	
 	//method to add new profile in profile list
 	public void addProfile(Profile add) {
-		int ID = this.get_Plist().size() + 1;
-		add.setID(ID);
 		profiles.add(add);
 	}
 	
@@ -31,6 +30,10 @@ public class ProfileManager {
 	
 	public void importList(ArrayList<Profile> profiles) {
 		int len = profiles.size();
+		
+		for (int i = 0; i < this.get_Plist().size(); i++) { //reset the list
+			this.removeProfile(this.get_Plist().get(i));
+		}
 		
 		for (int i = 0; i < len; i++) {
 			this.addProfile(profiles.get(i));
@@ -51,6 +54,56 @@ public class ProfileManager {
 		}
 		return unique; 
 	}
+	
+	public ArrayList<Profile> getAdults() {
+		ArrayList<Profile> tempList = this.get_Plist();
+		for (int i = 0; i < tempList.size(); i++) {
+			Profile temp = tempList.get(i);
+			if (temp.getAge() < 16) {
+				tempList.remove(temp);
+			}
+		}
+		
+		ProfileManager pm = new ProfileManager();
+		pm.importList(tempList);
+		
+		return tempList;
+	}
+	
+	public Profile selectProfile(String title) throws IOException{
+		//Scanner scan = new Scanner(System.in);
+		//System.out.println("Search Name : ");
+		//String searchTerm = scan.nextLine();
+		Profile selectProf = null;
+		ArrayList<Profile> plist = this.get_Plist();
+		//ArrayList<Profile> searched = searchNames(searchTerm, profiles.get_Plist());
+		//System.out.println("size of searched is " + searched.size());
+		int option;
+		ArrayList<String> names = this.listNames();
+		names.add("Exit to Main Menu");
+		
+		do{
+		option = Menu.display_Menu(title, names);
+		if ( option >= 1 && option <= names.size()-1) {
+			selectProf = plist.get(option-1);
+		}
+		break;
+		}while(option != 0);
+		return  selectProf;
+		
+	}
+	
+	public ArrayList<String> listNames() {
+		ArrayList<String> names = new ArrayList<String>();
+		String name;
+		for (int i = 0; i < this.get_Plist().size(); i++) {
+			name = this.get_Plist().get(i).getName();
+			names.add(name);
+		}				
+		
+		return names;
+	}
+	
 	
 	
 }
