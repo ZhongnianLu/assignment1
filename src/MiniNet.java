@@ -11,7 +11,7 @@ public class MiniNet {
 	
 	public static void main(String[] args) {
 	
-	MiniNet network = new MiniNet();
+	Menu network = new Menu();
 	network.getMenu();
 	}
 
