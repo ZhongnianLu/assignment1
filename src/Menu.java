@@ -94,7 +94,7 @@ public class Menu {
 			
 			//System.out.println("Please enter a status update : ");   // enter a status
 			
-			int ID = profiles.get_Plist().size();
+			int ID = profiles.get_Plist().size()+1;
 			Profile person = new Profile(name, status, age, ID); //create a profile object
 			//person.setID(profiles.get_Plist().size()+1); //set ID based on number of profiles
 			profiles.addProfile(person);
