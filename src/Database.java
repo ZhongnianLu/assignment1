@@ -12,7 +12,7 @@ public class Database {
 		Profile Mary = new Profile("Mary", "shopping", 60, 3);
 		Profile Lisa = new Profile("Lisa", "at the tennis", 65, 4);
 		Profile Evan = new Profile("Evan", "reading", 12, 5);
-		Profile Veronica = new Profile("Veronica", "contemplating life", 6, 5);
+		Profile Veronica = new Profile("Veronica", "contemplating life", 6, 6);
 		
 		
 	//}
