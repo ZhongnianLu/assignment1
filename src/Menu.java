@@ -11,7 +11,7 @@ public class Menu {
 	public static ProfileManager profiles = new ProfileManager();  //new object to manage profile
 	public static ConnectionManager conns = new ConnectionManager(); //new object to manage connections
 	
-	public static void main(String[] args) throws IOException 
+	public void getMenu() throws IOException 
 	{
 	profiles.importList(data.readProfiles()); //import the profiles from the data object to the profile manager
 	conns.importList(data.readConnections()); //import the connections from the data object to the connection manager
