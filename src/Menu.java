@@ -292,6 +292,9 @@ public class Menu {
  		printInfo(prof.getName());
  		System.out.println("=============================");
  		printInfo(prof.getStatus());
+		System.out.println("=============================");
+ 		printInfo(prof.getAge());
+ 		
  		System.out.println("=============================\n");
  		printInfo("Friends :\n");
  		ArrayList<Profile> friends = conns.search(prof);
