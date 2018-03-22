@@ -61,7 +61,7 @@ public class Menu {
 				System.out.println("-----------------------------");
 				printInfo("Your Choice :");
 				option = scan.nextInt();
-				if (option >= 0 && option < length-1){return option;} //if option is valid, return value
+				if (option >= 0 && option < length){return option;} //if option is valid, return value
 				else {throw new IOException("\nError: Input invalid, must input corresponding number for selection.");}
 				}  //if option is outside if range of choices throw exception
 			
