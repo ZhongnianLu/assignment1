@@ -293,7 +293,7 @@ public class Menu {
  		System.out.println("=============================");
  		printInfo(prof.getStatus());
 		System.out.println("=============================");
- 		printInfo(prof.getAge());
+ 		printInfo(Integer.toString(prof.getAge()));
  		
  		System.out.println("=============================\n");
  		printInfo("Friends :\n");
