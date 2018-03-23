@@ -1,16 +1,11 @@
 /Connection.class
 /ConnectionManager.class
 /Couple_Connection.class
-/Dependent_Connection.class
-<<<<<<< HEAD
-/Profile.class
-=======
+/Database.class
 /Friend_Connection.class
+/Menu.class
+/MiniNet.class
 /Parent_Connection.class
 /Profile.class
 /ProfileManager.class
 /test.class
->>>>>>> e9c1847a423b5097e63beba66d56749ec811e688
-/Adult.class
-/Child.class
-/MiniNet.class
