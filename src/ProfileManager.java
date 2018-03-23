@@ -104,6 +104,12 @@ public class ProfileManager {
 		return names;
 	}
 	
+	public void print() {
+    	for (int i = 0; i < this.get_Plist().size(); i++) {
+    		System.out.println(this.get_Plist().get(i));
+    	}
+    }
+	
 	
 	
 }
