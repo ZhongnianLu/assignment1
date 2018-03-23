@@ -77,7 +77,7 @@ public class Menu {
 		//String name = enterName(profiles); // method for entering age
 		try {			
 			Scanner scan = new Scanner(System.in);
-			
+			profiles.print();
 			System.out.println();
 			System.out.println("\nPlease enter your name : ");
 			String name = scan.nextLine();
@@ -103,16 +103,21 @@ public class Menu {
 			if (age > 0 && age < 16) {					//if profile holder is a dependent
 				ProfileManager tempList = new ProfileManager();
 				tempList.importList(profiles.getAdults());
+				profiles.print();
 				System.out.println("\nYou are a dependent. Please select your parents");
 				Profile parent1 = tempList.selectProfile("--First Parent--"); //select first parent profile object
+				profiles.print();
 				tempList.removeProfile(parent1);   //removes the selected profile from list
+				profiles.print();
 				Profile parent2 = tempList.selectProfile("--Second Parent--");
+				profiles.print();
 				if(conns.addParentConnection(parent1.getID(), parent2.getID(), person.getID())) {
 					//profiles.addProfile(person);
 					System.out.println("\nProfile created");
 				}
 				else {
 					profiles.removeProfile(person);
+					profiles.print();
 					throw new IOException("\nError: Parents must be connected");
 				}
 			}
