@@ -1,10 +1,21 @@
 import java.util.ArrayList;
 
+/*
+ * Author: Jake Mott s3349405
+ * 
+ * This class contains predefined data but can contain methods
+ * for reading in data from another source. Methods return
+ * ArrayLists to be called to feed the data to another class.
+ * 
+ */
+
 public class Database {
 	
+	/* Create new empty ArrayLists of profiles and connections */
 	ArrayList<Profile> profiles = new ArrayList<Profile>();
 	ArrayList<Connection> conns = new ArrayList<Connection>();	
-		
+	
+	/* Create profiles */
 	Profile Bob = new Profile("bob", "at work", 35);
 	Profile James = new Profile("James", "eating KFC", 90);
 	Profile Mary = new Profile("Mary", "shopping", 60);
@@ -12,6 +23,7 @@ public class Database {
 	Profile Evan = new Profile("Evan", "reading", 12);
 	Profile Veronica = new Profile("Veronica", "contemplating life", 6);
 	
+	/* Set ID's of profiles and add them to profile ArrayList */
 	public ArrayList<Profile> readProfiles(){		
 		Bob.setID(1);
 		James.setID(2);
@@ -33,7 +45,7 @@ public class Database {
 	}
 		
 		
-	
+	/* Create connections of profiles and add them to connection ArrayList */
 	public ArrayList<Connection> readConnections(){		
 		conns.add(new Friend_Connection(Bob, Mary));
 		conns.add(new Friend_Connection(Lisa, James));
