@@ -8,16 +8,20 @@ public class Profile {
 	private int age;
 	private int ID;
 	
-	public Profile (String name, String status, int age, int ID) {
+	public Profile (String name, String status, int age) {
 		this.name = name;
 		this.image = "default.png";
 		this.status = status;
 		this.age = age;
-		this.ID = ID;
+		//this.ID = ID;
 	}
 	
-	public Profile (String name, int age, int ID) {
-		this(name, null, age, ID);
+	//public Profile (String name, String status int age) {
+		//this(name, status, age,);
+	
+	
+	public Profile (String name, int age) {
+		this(name, null, age);
 		
 	}
 	
