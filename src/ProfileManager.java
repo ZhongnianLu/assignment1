@@ -121,7 +121,7 @@ public class ProfileManager {
 		scan.nextLine();
 		System.out.println("Please enter a status update : ");   // enter a status
 		String status = scan.nextLine();
-		System.out.println(get_Plist().size()+1);
+		
 		Profile person = new Profile(name, status, age); //create a profile object
 		person.setID(get_Plist().size()+1); //set ID based on number of profiles
 		
