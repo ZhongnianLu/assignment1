@@ -67,6 +67,39 @@ public class Parent_Connection extends Connection {
 		
 		return success;
 		}
+	
+	
+	 public boolean repeat_check(ArrayList<Connection> c_list) {
+		
+		boolean repeat=false;
+		
+		boolean child_repeat=false;
+		
+		for(int i=0;i<c_list.size();i++) {
+			
+			if(c_list.get(i) instanceof Parent_Connection) {
+			
+			if(c_list.get(i).getChild().getID()==getChild().getID()){
+				child_repeat=true;
+			}
+			
+			if(c_list.get(i).getPerson1().getID()==getPerson1().getID() 
+					&&c_list.get(i).getPerson2().getID()==getPerson2().getID()
+					&&child_repeat==true){
+				repeat=true;
+				System.out.println("Repeated");
+			}
+			if(c_list.get(i).getPerson2().getID()==getPerson1().getID() 
+					&&c_list.get(i).getPerson1().getID()==getPerson2().getID()
+					&&child_repeat==true){
+				repeat=true;
+				System.out.println("Repeated");
+
+			}
+		}}
+		
+		return repeat;
+	}
 
 	
 	
