@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /*
@@ -106,7 +107,8 @@ public class ProfileManager {
     	}
     }
 	
-	public Profile askInfo() throws IOException {
+	public Profile askInfo() throws IOException, InputMismatchException {
+		
 		Scanner scan = new Scanner(System.in);
 		System.out.println();
 		System.out.println("\nPlease enter your name : ");
@@ -116,7 +118,7 @@ public class ProfileManager {
 		
 		System.out.println("\nPlease enter your age : "); //enter age
 		int age = scan.nextInt();
-		if (age <= 0) throw new IOException("\nError: Age must be positve");
+		if (age <= 0) throw new IOException("\nError: Age must be nonzero and positive");
 		
 		scan.nextLine();
 		System.out.println("Please enter a status update : ");   // enter a status
@@ -126,6 +128,7 @@ public class ProfileManager {
 		person.setID(get_Plist().size()+1); //set ID based on number of profiles
 		
 		return person;
+				
 	}
 
 
