@@ -7,20 +7,22 @@ import java.util.ArrayList;
  */
 
 public class ProfileManager {
+	ArrayList<Profile> profiles =new ArrayList<Profile>();
 	
-	// list of all profiles
-	ArrayList<Profile> profiles=new ArrayList<Profile>();
-	//int IDcount = 0;
+	public ProfileManager(ArrayList<Profile> profs) {
+		this.profiles = profs;
+	}
+	
+	public ProfileManager() {
+		this.profiles = new ArrayList<Profile>();
+	}
 	
 	public ArrayList<Profile> get_Plist(){
 		return profiles;
 	}
 	
-	
 	//method to add new profile in profile list
 	public void addProfile(Profile add) {
-		//int ID = this.get_Plist().size();
-		//add.setID(IDcount+1);
 		profiles.add(add);
 	}
 	
@@ -28,7 +30,6 @@ public class ProfileManager {
 	public void removeProfile(Profile del) {
 		profiles.remove(del);
 	}
-	
 	
 	public void importList(ArrayList<Profile> profiles) {
 		int len = profiles.size();
@@ -58,28 +59,20 @@ public class ProfileManager {
 	}
 	
 	public ArrayList<Profile> getAdults() {
-		ArrayList<Profile> tempList = this.get_Plist();
-		for (int i = 0; i < tempList.size(); i++) {
-			Profile temp = tempList.get(i);
-			if (temp.getAge() < 16) {
-				tempList.remove(temp);
+		ArrayList<Profile> tempList = new ArrayList<Profile>();
+		for (int i = 0; i < this.get_Plist().size(); i++) {
+			Profile temp = this.get_Plist().get(i);
+			if (temp.getAge() >= 16) {
+				tempList.add(temp);
 			}
 		}
-		
-		ProfileManager pm = new ProfileManager();
-		pm.importList(tempList);
 		
 		return tempList;
 	}
 	
 	public Profile selectProfile(String title) throws IOException{
-		//Scanner scan = new Scanner(System.in);
-		//System.out.println("Search Name : ");
-		//String searchTerm = scan.nextLine();
 		Profile selectProf = null;
 		ArrayList<Profile> plist = this.get_Plist();
-		//ArrayList<Profile> searched = searchNames(searchTerm, profiles.get_Plist());
-		//System.out.println("size of searched is " + searched.size());
 		int option;
 		ArrayList<String> names = this.listNames();
 		names.add("Exit to Main Menu");
@@ -111,8 +104,6 @@ public class ProfileManager {
     		System.out.println(this.get_Plist().get(i).getName());
     	}
     }
-	
-	
 	
 }
 
