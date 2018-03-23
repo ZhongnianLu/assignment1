@@ -48,7 +48,7 @@ public class Menu {
 			try{System.out.println();
 				printInfo(title);
 				System.out.println("-----------------------------");
-				//String [] options =  {"Create Profile", "Select Profile", "Add Friend", "Check Friends", "Find Relatives", "Delete Profile", "Exit"};
+				//String [] options =  {"Create Profile", "Select Profile", "Add Connection", "Check Connection", "Find Relatives", "Delete Profile", "Exit"};
 				int length = options.size();
 				//System.out.println(length);
 				int [] pids =  numArray(options.size());  //creating arrays of numbers of the choices
@@ -120,15 +120,14 @@ public class Menu {
 			
 			
 			if (person1.getAge() < 16 || person2.getAge() < 16) {
-				
-				if (person1.getAge() < 16 && person2.getAge() < 16) {
-					if(diffParents(person1, person2, conns)) {
-						conns.addFriendConnection(person1.getID(), person2.getID());
+				 if (person1.getAge() < 16 && person2.getAge() < 16 && (diffParents(person1, person2, conns))) {
+					if(conns.addFriendConnection(person1.getID(), person2.getID())) {
+						System.out.println(person1.getName() + " is now friends with " + person2.getName());
 					}
-				}
-				else throw new IOException ("\nError: Cannot connect, adult is not dependent's parent");
+					else throw new IOException ("\nError: Cannot connect, adult is not dependent's parent");
+				 }
 			}
-			else connectionMenu(person1, person2, conns, profiles);
+			else {connectionMenu(person1, person2, conns, profiles);}
  		}catch (IOException ie){System.out.println(ie.getMessage());}
 		
 	}
@@ -182,12 +181,12 @@ public class Menu {
 			option = display_Menu("Select Connection Type", options);
 			if ( option == 1 )
 				if(conns.addFriendConnection(pers1.getID(), pers2.getID())){
-					System.out.println("Connection made");
+					System.out.println(pers1.getName() + " is now friends with " + pers2.getName());
 				}else option = 0;
 		    else if ( option == 2)
 		    	if(conns.addCoupleConnection(pers1.getID(),  pers2.getID())) {
-		    		System.out.println("Connection made");
-		    	}else throw new IOException("\nError: One or more persons is already coupled");
+		    		System.out.println(pers1.getName() + " and  " + pers2.getName() + " are now a couple");
+		    	}else throw new IOException("\nError: One or more persons are already coupled");
 		    else if ( option == 3) {
 		    	createParent(pers1, pers2, profiles, conns);
 		    }
@@ -367,7 +366,7 @@ public class Menu {
 			}
 			
 			if (connected) 
-				System.out.println(person1.getName() + " is friends with " + person2.getName());
+				System.out.println(person1.getName() + " is now friends with " + person2.getName());
 			else
 				System.out.println(person1.getName() + " is not friends with " + person2.getName());
 			done = true;
