@@ -1,4 +1,11 @@
-//import java.util.ArrayList;
+
+/*
+ * Author: Jake Mott s3349405
+ * 
+ * This class contains the profile constructor and 
+ * methods for changing profile info
+ * 
+ */
 
 public class Profile {
 	
@@ -6,23 +13,17 @@ public class Profile {
 	private String image;
 	private String status;
 	private int age;
-	private int ID;
+	private int ID; //ID for identifying purposes in connection list
 	
 	public Profile (String name, String status, int age) {
 		this.name = name;
 		this.image = "default.png";
 		this.status = status;
 		this.age = age;
-		
 	}
-	
-	//public Profile (String name, String status, int age) {
-		//this(name, status, age, );
-	
 	
 	public Profile (String name, int age) {
 		this(name, null, age);
-		
 	}
 	
 	public String getName() {
@@ -58,7 +59,7 @@ public class Profile {
 	
 	public void setImage(String image) {
 		this.image = image;
-		System.out.println("Your name has been changed");
+		System.out.println("Your image has been changed");
 	}
 	
 	public void setID(int ID) {
