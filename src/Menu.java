@@ -19,7 +19,7 @@ public class Menu {
 		
 	int option;
 	do{
-		ArrayList<String> options = new ArrayList<String>(Arrays.asList("Create Profile", "Select Profile", "Add Friend", "Check Friends", "Find Relatives", "Delete Profile", "Exit"));
+		ArrayList<String> options = new ArrayList<String>(Arrays.asList("Create Profile", "Select Profile", "Add Connection", "Check Connection", "Find Relatives", "Delete Profile", "Exit"));
 		
 		option = display_Menu("MiniNet Main Menu", options);
 		
@@ -28,16 +28,16 @@ public class Menu {
 	    else if ( option == 2) {
 	    	Profile prof = profiles.selectProfile("Please select a profile:");
 	 		if (prof != null)
-	 		printProfile(prof, profiles, conns);
+	 		printProfile(prof);
 	    }
 	    else if( option == 3)
-	    	  addConnection(profiles, conns);    
+	    	  addConnection();    
 	    else if ( option == 4)
-				checkConnection(profiles, conns);
+				checkConnection();
 		else if ( option == 5)
-	    	  findRelative(profiles, conns);
+	    	  findRelative();
 	    else if (option == 6)
-	    	deleteProfile(profiles, conns);
+	    	deleteProfile();
 	}while(option != 0);
 
 	}
@@ -48,11 +48,8 @@ public class Menu {
 			try{System.out.println();
 				printInfo(title);
 				System.out.println("-----------------------------");
-				//String [] options =  {"Create Profile", "Select Profile", "Add Connection", "Check Connection", "Find Relatives", "Delete Profile", "Exit"};
 				int length = options.size();
-				//System.out.println(length);
 				int [] pids =  numArray(options.size());  //creating arrays of numbers of the choices
-				//System.out.println(Arrays.toString(pids));
 				int i = 0;
 				for( String s : options ) { 
 					System.out.printf("%-27s %d%n", s, pids[i++]); //printing the menu with equal spacing
@@ -104,7 +101,7 @@ public class Menu {
 		
 	}
 		
- 	public static void addConnection(ProfileManager profiles, ConnectionManager conns) throws IOException{
+ 	public static void addConnection() throws IOException{
  		ProfileManager tempList = new ProfileManager();
  		tempList.importList(profiles.get_Plist());
 		
@@ -120,28 +117,28 @@ public class Menu {
 			
 			
 			if (person1.getAge() < 16 || person2.getAge() < 16) {
-				 if (person1.getAge() < 16 && person2.getAge() < 16 && (diffParents(person1, person2, conns))) {
+				 if (person1.getAge() < 16 && person2.getAge() < 16 && (diffParents(person1, person2))) {
 					if(conns.addFriendConnection(person1.getID(), person2.getID())) {
 						System.out.println(person1.getName() + " is now friends with " + person2.getName());
 					}
 					else throw new IOException ("\nError: Cannot connect, adult is not dependent's parent");
 				 }
 			}
-			else {connectionMenu(person1, person2, conns, profiles);}
+			else {connectionMenu(person1, person2);}
  		}catch (IOException ie){System.out.println(ie.getMessage());}
 		
 	}
  	
- 	public static boolean diffParents(Profile pers1, Profile pers2, ConnectionManager conns) {
+ 	public static boolean diffParents(Profile pers1, Profile pers2) {
  		boolean same = false;
  		Profile parent1 = null;
  		Profile parent2 = null;
  		Profile parent3 = null;
  		Profile parent4 = null;
  		
- 		ArrayList<Connection> c1 = getRelations(pers1, conns);
+ 		ArrayList<Connection> c1 = getRelations(pers1);
  	
- 		ArrayList<Connection> c2 = getRelations(pers2, conns);
+ 		ArrayList<Connection> c2 = getRelations(pers2);
  		
  		
  		for(int i = 0; i < c1.size(); i++) {
@@ -161,7 +158,7 @@ public class Menu {
  		return same;
  	}
  	
- 	public static ArrayList<Connection> getRelations(Profile prof, ConnectionManager conns){
+ 	public static ArrayList<Connection> getRelations(Profile prof){
  		ArrayList<Connection> friends = conns.search_clist(prof);//method for returning connection related to profile
  		ArrayList<Connection> relations = new ArrayList<Connection>();		
  		for(int i = 0; i < friends.size(); i++) {
@@ -173,7 +170,7 @@ public class Menu {
  		return relations;
  	}
  		
- 	public static void connectionMenu(Profile pers1, Profile pers2,ConnectionManager conns, ProfileManager profiles )throws IOException{
+ 	public static void connectionMenu(Profile pers1, Profile pers2)throws IOException{
  		int option;
 		do{
 			ArrayList<String> options = new ArrayList<String>(Arrays.asList("Friend", "Couple", "Parent", "Exit to Main Menu"));
@@ -188,14 +185,14 @@ public class Menu {
 		    		System.out.println(pers1.getName() + " and  " + pers2.getName() + " are now a couple");
 		    	}else throw new IOException("\nError: One or more persons are already coupled");
 		    else if ( option == 3) {
-		    	createParent(pers1, pers2, profiles, conns);
+		    	createParent(pers1, pers2);
 		    }
 			break;
 			}while(option != 0);
 	 		
  	}
  	
- 	public static void createParent(Profile pers1, Profile pers2, ProfileManager profiles, ConnectionManager conns) throws IOException {
+ 	public static void createParent(Profile pers1, Profile pers2) throws IOException {
  		boolean done = false;
  		do {
 	 		Scanner scan = new Scanner(System.in);
@@ -235,7 +232,7 @@ public class Menu {
  	   return a;
  	}
  				
- 	public static void printProfile(Profile prof, ProfileManager profiles, ConnectionManager conns) throws IOException {
+ 	public static void printProfile(Profile prof) throws IOException {
  		System.out.println();
  		System.out.println();
  		System.out.println("=============================");
@@ -252,31 +249,31 @@ public class Menu {
  		ArrayList<Profile> friends = conns.search(prof);
  		int count = 0;
  		for (int i = 0; i < friends.size(); i++) {
- 			printInfo(friends.get(i).getName() + "   ID: " + friends.get(i).getID());
+ 			printInfo(friends.get(i).getName());
  			count++;
  		}
  		if (count == 0) printInfo(prof.getName() + " has no friends");
- 		profileMenu(prof, profiles, conns);
+ 		profileMenu(prof);
  	}
  	
- 	public static void profileMenu(Profile prof, ProfileManager profiles, ConnectionManager conns) throws IOException {
+ 	public static void profileMenu(Profile prof) throws IOException {
  		int option;
 		do{
 			ArrayList<String> options = new ArrayList<String>(Arrays.asList("Update Name", "Update Image", "Update Status", "Exit to Main Menu"));
 			
 			option = display_Menu("Profile Menu", options);
 			if ( option == 1 )
-		          updateInfo(1, prof, profiles, conns);
+		          updateInfo(1, prof);
 		    else if ( option == 2)
-		    	  updateInfo(2, prof, profiles, conns);
+		    	  updateInfo(2, prof);
 		    else if( option == 3)
-		    	  updateInfo(3, prof, profiles, conns);    
+		    	  updateInfo(3, prof);    
 			break;
 			}while(option != 0);
 	 		
  	}
  	
- 	public static void updateInfo(int choice, Profile prof, ProfileManager profiles, ConnectionManager conns) throws IOException {
+ 	public static void updateInfo(int choice, Profile prof) throws IOException {
  		String info;
  		if (choice == 1) {
  			info = "name";
@@ -297,7 +294,7 @@ public class Menu {
  			prof.setImage(str);
  		}
  		else prof.setStatus(str);
-		printProfile(prof, profiles, conns);
+		printProfile(prof);
  	}
  	 	
  	public static void printInfo(String string) {
@@ -341,7 +338,7 @@ public class Menu {
         return parts;
     }
 			
-	public static void checkConnection(ProfileManager profiles, ConnectionManager conns) throws IOException {
+	public static void checkConnection() throws IOException {
 		boolean done = false;
 		try {
 			ProfileManager tempList = new ProfileManager();
@@ -375,7 +372,7 @@ public class Menu {
 		
 	}
 	
-	public static void findRelative(ProfileManager profiles, ConnectionManager conns) throws IOException {
+	public static void findRelative() throws IOException {
 		try{
 			//boolean done = false;
 			//do {
@@ -384,7 +381,7 @@ public class Menu {
 			Profile prof = profiles.selectProfile("Please select the profile");
 			if (prof == null) throw new IOException("");//done = true;
 				
-			ArrayList<Connection> family = getRelations(prof, conns);
+			ArrayList<Connection> family = getRelations(prof);
 			
 			for (int i = 0; i < family.size(); i++) {
 				Connection con = family.get(i);
@@ -400,7 +397,7 @@ public class Menu {
 			
 	}
 	
-    public static void deleteProfile(ProfileManager profiles, ConnectionManager conns) throws IOException {
+    public static void deleteProfile() throws IOException {
     	try {
     	Profile prof = profiles.selectProfile("Select a profile to delete:");
     	boolean deleted = true;
