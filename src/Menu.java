@@ -85,11 +85,7 @@ public class Menu {
 					Profile parent1 = tempList.selectProfile("--First Parent--"); //select first parent profile object
 					if (parent1 != null) {
 					
-						profiles.printp();
-						tempList.printp();
 						tempList.removeProfile(parent1);   //removes the selected profile from list
-						tempList.printp();
-						profiles.printp();
 						Profile parent2 = tempList.selectProfile("--Second Parent--");
 						if (parent2 != null) {
 						
@@ -117,9 +113,9 @@ public class Menu {
 			if (person1 == null) throw new IOException ("\nError: Profile is null");
 			
 			tempList.removeProfile(person1);   //removes the selected profile from list
-			printInfo("--Second Profile--");
+			
 			Profile person2 = tempList.selectProfile("--Second Profile--");
-			if (person2 == null) throw new IOException ("\nError: Profile is null");
+			if (person2 == null) throw new IOException ();
 			
 			
 			if (person1.getAge() < 16 || person2.getAge() < 16) {
@@ -158,7 +154,7 @@ public class Menu {
 				parent3 = c1.get(j).getPerson1();
 				parent4 = c1.get(j).getPerson2();
  				if ((parent1.equals(parent3) || parent1.equals(parent4)) && (parent2.equals(parent3) || parent2.equals(parent4))){
- 		 			same = true;
+ 		 			same = false;
  		 			break;
  				}
  			}
@@ -269,7 +265,7 @@ public class Menu {
  	public static void profileMenu(Profile prof, ProfileManager profiles, ConnectionManager conns) throws IOException {
  		int option;
 		do{
-			ArrayList<String> options = new ArrayList<String>(Arrays.asList("Update Name", "Update Image", "Update Status", "Delete Profile", "Exit to Main Menu"));
+			ArrayList<String> options = new ArrayList<String>(Arrays.asList("Update Name", "Update Image", "Update Status", "Exit to Main Menu"));
 			
 			option = display_Menu("Profile Menu", options);
 			if ( option == 1 )
@@ -278,8 +274,6 @@ public class Menu {
 		    	  updateInfo(2, prof, profiles, conns);
 		    else if( option == 3)
 		    	  updateInfo(3, prof, profiles, conns);    
-		    else if (option == 5)
-		    	deleteProfile(prof, profiles, conns);
 			break;
 			}while(option != 0);
 	 		
@@ -400,28 +394,27 @@ public class Menu {
 		
 	}
 	
-    public static void deleteProfile(Profile prof, ProfileManager profiles, ConnectionManager conns) throws IOException {
-    	ArrayList<Connection> friends = conns.search_clist(prof);
+    public static void deleteProfile(ProfileManager profiles, ConnectionManager conns) throws IOException {
+    	Profile prof = profiles.selectProfile("Select a profile to delete:");
     	boolean deleted = true;
-    	if(friends != null) {
-    		for(int i = 0; i < friends.size(); i++) {
-    			if(conns.get_Clist().remove(friends.get(i)) == false)
-    				deleted = false;
-    		}
+    	if (prof != null) {
+    	
+    		ArrayList<Connection> friends = conns.search_clist(prof);
+        	if(friends != null) {
+        		for(int i = 0; i < friends.size(); i++) {
+        			if(conns.get_Clist().remove(friends.get(i)) == false)
+        				deleted = false;
+        		}
+        	}
+    	
     	}
-     	
+    		
+    	else throw new IOException ("\nError: Profile is null");
+		
     	if(deleted) {
     		profiles.removeProfile(prof);
         	System.out.println("The profile has been deleted");
     	} else throw new IOException("\nError: Unable to delete all friends. Deletion cancelled.");
-    }
-    
-    public static void deleteProfile(ProfileManager profiles, ConnectionManager conns) throws IOException {
-    	Profile prof = profiles.selectProfile("Select a profile to delete:");
-    	if (prof != null)
-    		deleteProfile(prof, profiles, conns);
-    	else throw new IOException ("\nError: Profile is null");
-		
     }
 			
 		
