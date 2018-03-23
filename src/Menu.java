@@ -97,17 +97,40 @@ public class Menu {
 			
 			//int ID = profiles.get_Plist().size()+1;
 			Profile person = new Profile(name, status, age); //create a profile object
-			//person.setID(profiles.get_Plist().size()+1); //set ID based on number of profiles
+			person.setID(profiles.get_Plist().size()+1); //set ID based on number of profiles
+			profiles.printp();
+			
 			profiles.addProfile(person);
 			
 			
+			System.out.println(Integer.toString(profiles.get_Plist().size()));
+			profiles.printp();
+			
+			
 			if (age > 0 && age < 16) {					//if profile holder is a dependent
+				System.out.println(Integer.toString(profiles.get_Plist().size()));
+				profiles.printp();
+				
+				
 				ProfileManager tempList = new ProfileManager();
+				System.out.println(Integer.toString(profiles.get_Plist().size()));
+				profiles.printp();
+				
+				
+				System.out.println("adults size is " + Integer.toString(profiles.getAdults().size()));
+				
+				
+				
+				
+				
 				tempList.importList(profiles.getAdults());
+				System.out.println(Integer.toString(profiles.get_Plist().size()));
+				
 				profiles.printp();
 				System.out.println("\nYou are a dependent. Please select your parents");
 				Profile parent1 = tempList.selectProfile("--First Parent--"); //select first parent profile object
 				profiles.printp();
+				tempList.printp();
 				tempList.removeProfile(parent1);   //removes the selected profile from list
 				profiles.printp();
 				Profile parent2 = tempList.selectProfile("--Second Parent--");
