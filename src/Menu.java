@@ -255,7 +255,7 @@ public class Menu {
  		ArrayList<Profile> friends = conns.search(prof);
  		int count = 0;
  		for (int i = 0; i < friends.size(); i++) {
- 			printInfo(friends.get(i).getName());
+ 			printInfo(friends.get(i).getName() + "   ID: " + friends.get(i).getID());
  			count++;
  		}
  		if (count == 0) printInfo(prof.getName() + " has no friends");
@@ -353,7 +353,6 @@ public class Menu {
 	 		System.out.println("\nPlease select the profiles to check");
 			String title = "--First Profile--";
 			Profile person1 = tempList.selectProfile(title); //select first parent profile object
-			printProfile(person1,profiles, conns);
 			if (person1 != null) {done = true;}
 			
 			tempList.removeProfile(person1);   //removes the selected profile from list
