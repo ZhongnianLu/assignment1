@@ -22,6 +22,7 @@ public class Menu {
 		ArrayList<String> options = new ArrayList<String>(Arrays.asList("Create Profile", "Select Profile", "Add Friend", "Check Friends", "Find Relatives", "Delete Profile", "Exit"));
 		
 		option = display_Menu("MiniNet Main Menu", options);
+		
 		if ( option == 1 )
 	          addProfile(profiles, conns);
 	    else if ( option == 2) {
