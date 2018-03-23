@@ -44,7 +44,7 @@ public class Menu {
 	
 	public static int display_Menu(String title, ArrayList<String> options){
 		
-		int option = 1; //initial option
+		int option = 0; //initial option
 			try{System.out.println();
 				printInfo(title);
 				System.out.println("-----------------------------");
@@ -74,37 +74,11 @@ public class Menu {
 	}
 	
 	public static void addProfile() throws IOException{
-		
-		//String name = enterName(profiles); // method for entering age
 		try {
-			//boolean done = false;
-			//do {
-				Scanner scan = new Scanner(System.in);
-				profiles.printp();
-				System.out.println();
-				System.out.println("\nPlease enter your name : ");
-				String name = scan.nextLine();
-				if (profiles.uniqueName(name) != true) throw new IOException("\nError: Name must be unique");
-			
-				
-				System.out.println("\nPlease enter your age : "); //enter age
-				int age = scan.nextInt();
-				if (age <= 0) throw new IOException("\nError: Age must be positve");
-				
-				scan.nextLine();
-				System.out.println("Please enter a status update : ");   // enter a status
-				String status = scan.nextLine();
-				
-				Profile person = new Profile(name, status, age); //create a profile object
-				person.setID(profiles.get_Plist().size()+1); //set ID based on number of profiles
+				Profile person = profiles.askInfo();
 				profiles.addProfile(person);
 				
-				
-				System.out.println(Integer.toString(profiles.get_Plist().size()));
-				profiles.printp();
-				
-				
-				if (age > 0 && age < 16) {					//if profile holder is a dependent
+				if (person.getAge() > 0 && person.getAge() < 16) {					//if profile holder is a dependent
 					ProfileManager tempList = new ProfileManager(profiles.getAdults());
 						
 					System.out.println("\nYou are a dependent. Please select your parents");
@@ -118,12 +92,8 @@ public class Menu {
 						profiles.printp();
 						Profile parent2 = tempList.selectProfile("--Second Parent--");
 						if (parent2 != null) {
-						profiles.printp();
 						
-							if(conns.addParentConnection(parent1.getID(), parent2.getID(), person.getID())) {
-								//profiles.addProfile(person);
-								System.out.println("\nProfile created");
-							}
+							if(conns.addParentConnection(parent1.getID(), parent2.getID(), person.getID())) System.out.println("\nProfile created");
 							else {
 								profiles.removeProfile(person);
 								profiles.printp();
@@ -131,21 +101,17 @@ public class Menu {
 							}
 						}
 					}
-				}
+				} else System.out.println("\nProfile created");
 		}
 		catch (IOException ie){System.out.println(ie.getMessage());}
 		
 	}
 		
-	
  	public static void addConnection(ProfileManager profiles, ConnectionManager conns) throws IOException{
- 		
  		ProfileManager tempList = new ProfileManager();
  		tempList.importList(profiles.get_Plist());
 		
  		try {
- 			boolean done = false;
-			do {
 	 		System.out.println("\nPlease select the profiles to connect");
 			Profile person1 = tempList.selectProfile("--First Profile--"); //select first parent profile object
 			if (person1 == null) throw new IOException ("\nError: Profile is null");
@@ -159,40 +125,19 @@ public class Menu {
 			if (person1.getAge() < 16 || person2.getAge() < 16) {
 				
 				if (person1.getAge() < 16 && person2.getAge() < 16) {
-					//search connections for parents
-					//check if parents are the same
-					//set success to false if they do have same parents
 					if(diffParents(person1, person2, conns)) {
 						conns.addFriendConnection(person1.getID(), person2.getID());
-						done = true;
 					}
 				}
 				else throw new IOException ("\nError: Cannot connect, adult is not dependent's parent");
 			}
 			else {
 				connectionMenu(person1, person2, conns, profiles);
-				//conns.addFriendConnection(person1.getID(), person2.getID())
-			
 				System.out.println("\nConnection made");
-				done = true;
 			}
-			//else done = true;
-			
-			}while (done = false);
  		}catch (IOException ie){System.out.println(ie.getMessage());}
 		
-			//search names
- 		//select first profile
- 		//search again to select second profile
- 		//try to make a connection between them doing checks
- 		//    -check if already friends
- 		//    -if person is already a parent or coupled, cannot make another couple connection
- 		//    -check for age difference if child classes (diff <= 3)
- 		//    -check if have same parents if children
- 		//    -if child already have 2 parents, can't have 3
-			//want connections.addFriendConnection(profile.getID(), profile.getID())
-			//so aim to get the profile classes to be able to call the getID methods on them
-		}
+	}
  	
  	public static boolean diffParents(Profile pers1, Profile pers2, ConnectionManager conns) {
  		boolean same = false;
@@ -258,46 +203,43 @@ public class Menu {
  	}
  	
  	public static void createParent(Profile pers1, Profile pers2, ProfileManager profiles, ConnectionManager conns) throws IOException {
- 		
- 		Scanner scan = new Scanner(System.in);
-		ProfileManager pers = new ProfileManager();
-		pers.importList(new ArrayList<Profile>(Arrays.asList(pers1, pers2)));
-		
- 		Profile child = pers.selectProfile("Who the child?");
- 		
- 		Profile parent1;
- 		if(pers1.equals(child)) {
- 			parent1 = pers2;
- 		} else parent1 = pers1;
- 		
- 		Profile parent2;
- 		System.out.println();
- 		pers.importList(profiles.getAdults());
- 		
- 		pers.removeProfile(parent1);
- 		parent2 = pers.selectProfile("Please select the other parent");
- 		
- 		if(parent1.getAge() > child.getAge() && parent2.getAge() > child.getAge()) {
- 			if(conns.addParentConnection(parent1.getID(), parent2.getID(), child.getID()))
- 				System.out.println("\nProfile created");
- 			else throw new IOException("\nError: Parents must be connected");
- 		}else throw new IOException("\nError: Parents must be older than child");
+ 		boolean done = false;
+ 		do {
+	 		Scanner scan = new Scanner(System.in);
+			ProfileManager pers = new ProfileManager();
+			pers.importList(new ArrayList<Profile>(Arrays.asList(pers1, pers2)));
+			
+	 		Profile child = pers.selectProfile("Who the child?");
+	 		
+	 		Profile parent1;
+	 		if(pers1.equals(child)) {
+	 			parent1 = pers2;
+	 		} else parent1 = pers1;
+	 		
+	 		Profile parent2;
+	 		System.out.println();
+	 		pers.importList(profiles.getAdults());
+	 		
+	 		pers.removeProfile(parent1);
+	 		parent2 = pers.selectProfile("Please select the other parent");
+	 		if (parent2 == null) done = true;
+	 		
+	 		if(parent1.getAge() > child.getAge() && parent2.getAge() > child.getAge()) {
+	 			if(conns.addParentConnection(parent1.getID(), parent2.getID(), child.getID()))
+	 				System.out.println("\nProfile created");
+	 			else throw new IOException("\nError: Parents must be connected");
+	 		}else throw new IOException("\nError: Parents must be older than child");
+ 		}while(done == false);
  	}
  	
  	static int[] numArray(int num) {
  	    
  	   int[] a = new int[num];
  	    for (int i = 0; i < num-1; ++i) {
- 	    	//System.out.println("num array, i is " + i);
- 	        a[i] = i+1;
+ 	    	 a[i] = i+1;
  	    }
  	    a[num-1] = 0;
- 	    //for (int i = 0; i < a.length; i++) {
- 	    	//System.out.println("index " + i + " in a is " + a[i]);
- 	 	    
- 	    //}
- 	    //System.out.println(Arrays.toString(a));
- 	    return a;
+ 	   return a;
  	}
  				
  	public static void printProfile(Profile prof, ProfileManager profiles, ConnectionManager conns) throws IOException {
@@ -417,13 +359,12 @@ public class Menu {
 	 		System.out.println("\nPlease select the profiles to check");
 			String title = "--First Profile--";
 			Profile person1 = tempList.selectProfile(title); //select first parent profile object
-			if (person1 == null) {
-				done = true;
-			}
+			printProfile(person1,profiles, conns);
+			if (person1 != null) {done = true;}
 			
 			tempList.removeProfile(person1);   //removes the selected profile from list
 			Profile person2 = tempList.selectProfile("--Second Profile--");
-			if (person2 == null) done = true;
+			if (person2 == null) {done = true;}
 			
 			ArrayList<Profile> friends = conns.search(person1);
 			boolean connected = false;

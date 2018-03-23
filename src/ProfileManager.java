@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /*
  * This class contains all profiles
@@ -105,6 +106,29 @@ public class ProfileManager {
     	}
     }
 	
+	public Profile askInfo() throws IOException {
+		Scanner scan = new Scanner(System.in);
+		System.out.println();
+		System.out.println("\nPlease enter your name : ");
+		String name = scan.nextLine();
+		if (this.uniqueName(name) != true) throw new IOException("\nError: Name must be unique");
+	
+		
+		System.out.println("\nPlease enter your age : "); //enter age
+		int age = scan.nextInt();
+		if (age <= 0) throw new IOException("\nError: Age must be positve");
+		
+		scan.nextLine();
+		System.out.println("Please enter a status update : ");   // enter a status
+		String status = scan.nextLine();
+		
+		Profile person = new Profile(name, status, age); //create a profile object
+		person.setID(this.get_Plist().size()); //set ID based on number of profiles
+		
+		return person;
+	}
+
+
 }
 
 
