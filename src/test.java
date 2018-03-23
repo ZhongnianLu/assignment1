@@ -10,14 +10,14 @@ public class test {
 	public static void main(String[] args) {
 		
 		//create five new instances of profiles
-		Profile p1=new Adult("A","Work",1);//0
-		Profile p2=new Adult("B","Work",2);//1
-		Profile p3=new Adult("C","Work",4);//2
-		Profile p4=new Adult("D","Work",7);//3
-		Profile p5=new Adult("E","Home",27);//4
-		Profile p6=new Adult("F","Home",24);//5
-		Profile p7=new Adult("G","Work",29);//6
-		Profile p8=new Adult("H","Work",29);//7
+		Profile p1=new Profile("A","Work",1);//0
+		Profile p2=new Profile("B","Work",2);//1
+		Profile p3=new Profile("C","Work",4);//2
+		Profile p4=new Profile("D","Work",7);//3
+		Profile p5=new Profile("E","Home",27);//4
+		Profile p6=new Profile("F","Home",24);//5
+		Profile p7=new Profile("G","Work",29);//6
+		Profile p8=new Profile("H","Work",29);//7
 
 
 		
@@ -89,9 +89,7 @@ public class test {
 		 * 
 		 */	
 		//try to add new connections 
-		test_MC.addFriendConnection(006, 005);
-		
-		test_MC.addFriendConnection(005, 007);
+	
 
 		
 		test_MC.addCoupleConnection(005, 006);
@@ -100,9 +98,7 @@ public class test {
 		
 		test_MC.addParentConnection(006, 005, 1);
 		
-		test_MC.addParentConnection(8, 007, 2);
-		
-		test_MC.addFriendConnection(003, 004);
+		test_MC.addParentConnection(006, 005, 2);
 
 		
 
