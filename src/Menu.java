@@ -92,7 +92,6 @@ public class Menu {
 							if(conns.addParentConnection(parent1.getID(), parent2.getID(), person.getID())) System.out.println("\nProfile created");
 							else {
 								profiles.removeProfile(person);
-								profiles.printp();
 								throw new IOException("\nError: Parents must be connected");
 							}
 						}
