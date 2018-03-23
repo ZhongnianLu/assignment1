@@ -7,12 +7,12 @@ public class Database {
 	//Profile Bob = new Adult("bob", "Starlet 99", 35);
 	//public void main(String[] args) {
 		
-		Profile Bob = new Profile("bob", "at work", 35, 1);
-		Profile James = new Profile("James", "eating KFC", 90, 2);
-		Profile Mary = new Profile("Mary", "shopping", 60, 3);
-		Profile Lisa = new Profile("Lisa", "at the tennis", 65, 4);
-		Profile Evan = new Profile("Evan", "reading", 12, 5);
-		Profile Veronica = new Profile("Veronica", "contemplating life", 6, 6);
+		Profile Bob = new Profile("bob", "at work", 35);
+		Profile James = new Profile("James", "eating KFC", 90);
+		Profile Mary = new Profile("Mary", "shopping", 60);
+		Profile Lisa = new Profile("Lisa", "at the tennis", 65);
+		Profile Evan = new Profile("Evan", "reading", 12);
+		Profile Veronica = new Profile("Veronica", "contemplating life", 6);
 		
 		
 	//}
@@ -36,7 +36,7 @@ public class Database {
 		conns.add(new Friend_Connection(Bob, Mary));
 		conns.add(new Friend_Connection(Lisa, James));
 		//conns.add(new Couple_Connection(James, Mary));
-		conns.add(new Parent_Connection(Bob, lisa, Veronica));
+		conns.add(new Parent_Connection(Bob, Lisa, Veronica));
 		conns.add(new Parent_Connection(James,Mary, Evan));
 		return conns;
 	}

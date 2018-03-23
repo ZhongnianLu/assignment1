@@ -19,6 +19,8 @@ public class ProfileManager {
 	
 	//method to add new profile in profile list
 	public void addProfile(Profile add) {
+		int ID = this.get_Plist().size();
+		add.setID(ID);
 		profiles.add(add);
 	}
 	

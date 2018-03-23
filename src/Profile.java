@@ -13,11 +13,11 @@ public class Profile {
 		this.image = "default.png";
 		this.status = status;
 		this.age = age;
-		//this.ID = ID;
+		
 	}
 	
-	//public Profile (String name, String status int age) {
-		//this(name, status, age,);
+	//public Profile (String name, String status, int age) {
+		//this(name, status, age, );
 	
 	
 	public Profile (String name, int age) {
