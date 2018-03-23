@@ -185,7 +185,7 @@ public class ConnectionManager {
 		
 		if(tem instanceof Parent_Connection) {
 				
-			if((profile_repeat(tem.getChild(), contain)==false)&&tem.getPerson1().getID()!=target.getID()) {
+			if((profile_repeat(tem.getChild(), contain)==false)&&tem.getChild().getID()!=target.getID()) {
 				contain.add(c_list.get(i).getChild());
 			}
 		
