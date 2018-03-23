@@ -100,6 +100,8 @@ public class Menu {
 				} else System.out.println("\nProfile created");
 		}
 		catch (IOException ie){System.out.println(ie.getMessage());}
+		catch(InputMismatchException ex) {System.out.println("Error: Input must be an integer.");}
+
 		
 	}
 		
@@ -110,12 +112,12 @@ public class Menu {
  		try {
 	 		System.out.println("\nPlease select the profiles to connect");
 			Profile person1 = tempList.selectProfile("--First Profile--"); //select first parent profile object
-			if (person1 == null) throw new IOException ("\nError: Profile is null");
+			if (person1 == null) throw new IOException ("");
 			
 			tempList.removeProfile(person1);   //removes the selected profile from list
 			
 			Profile person2 = tempList.selectProfile("--Second Profile--");
-			if (person2 == null) throw new IOException ();
+			if (person2 == null) throw new IOException ("");
 			
 			
 			if (person1.getAge() < 16 || person2.getAge() < 16) {
@@ -127,10 +129,7 @@ public class Menu {
 				}
 				else throw new IOException ("\nError: Cannot connect, adult is not dependent's parent");
 			}
-			else {
-				connectionMenu(person1, person2, conns, profiles);
-				System.out.println("\nConnection made");
-			}
+			else connectionMenu(person1, person2, conns, profiles);
  		}catch (IOException ie){System.out.println(ie.getMessage());}
 		
 	}
@@ -346,18 +345,18 @@ public class Menu {
 			
 	public static void checkConnection(ProfileManager profiles, ConnectionManager conns) throws IOException {
 		boolean done = false;
-		do {
+		try {
 			ProfileManager tempList = new ProfileManager();
 	 		tempList.importList(profiles.get_Plist());
 				
 	 		System.out.println("\nPlease select the profiles to check");
 			String title = "--First Profile--";
 			Profile person1 = tempList.selectProfile(title); //select first parent profile object
-			if (person1 != null) {done = true;}
+			if (person1 == null) throw new IOException("");
 			
 			tempList.removeProfile(person1);   //removes the selected profile from list
 			Profile person2 = tempList.selectProfile("--Second Profile--");
-			if (person2 == null) {done = true;}
+			if (person2 == null) throw new IOException("");
 			
 			ArrayList<Profile> friends = conns.search(person1);
 			boolean connected = false;
@@ -373,27 +372,38 @@ public class Menu {
 			else
 				System.out.println(person1.getName() + " is not friends with " + person2.getName());
 			done = true;
-		}while(done == false);
+		}catch (IOException ie){System.out.println(ie.getMessage());}
+		
 		
 	}
 	
 	public static void findRelative(ProfileManager profiles, ConnectionManager conns) throws IOException {
-		System.out.println();
-		Profile prof = profiles.selectProfile("Please select the profile");
+		try{
+			//boolean done = false;
+			//do {
+			System.out.println();
 		
-		ArrayList<Connection> family = getRelations(prof, conns);
+			Profile prof = profiles.selectProfile("Please select the profile");
+			if (prof == null) throw new IOException("");//done = true;
+				
+			ArrayList<Connection> family = getRelations(prof, conns);
+			
+			for (int i = 0; i < family.size(); i++) {
+				Connection con = family.get(i);
+				if(prof.equals(con.getChild()))
+					System.out.println(prof.getName() + " is a child of " + con.getPerson1().getName() + " and " + con.getPerson2().getName());
+				else 
+					System.out.println(prof.getName() + " is a parent of " + con.getChild().getName());
+			}
+			//}while(done == false);
+			
+		}catch (IOException ie){System.out.println(ie.getMessage());}
 		
-		for (int i = 0; i < family.size(); i++) {
-			Connection con = family.get(i);
-			if(prof.equals(con.getChild()))
-				System.out.println(prof.getName() + " is a child of " + con.getPerson1().getName() + " and " + con.getPerson2().getName());
-			else 
-				System.out.println(prof.getName() + " is a parent of " + con.getChild().getName());
-		}
-		
+			
 	}
 	
     public static void deleteProfile(ProfileManager profiles, ConnectionManager conns) throws IOException {
+    	try {
     	Profile prof = profiles.selectProfile("Select a profile to delete:");
     	boolean deleted = true;
     	if (prof != null) {
@@ -406,14 +416,14 @@ public class Menu {
         		}
         	}
     	
-    	}
-    		
-    	else throw new IOException ("\nError: Profile is null");
+    	}else throw new IOException ("");
 		
     	if(deleted) {
     		profiles.removeProfile(prof);
         	System.out.println("The profile has been deleted");
     	} else throw new IOException("\nError: Unable to delete all friends. Deletion cancelled.");
+    }catch (IOException ie){System.out.println(ie.getMessage());}
+	
     }
 			
 		
