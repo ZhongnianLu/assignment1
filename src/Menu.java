@@ -103,21 +103,21 @@ public class Menu {
 			if (age > 0 && age < 16) {					//if profile holder is a dependent
 				ProfileManager tempList = new ProfileManager();
 				tempList.importList(profiles.getAdults());
-				profiles.print();
+				profiles.printp();
 				System.out.println("\nYou are a dependent. Please select your parents");
 				Profile parent1 = tempList.selectProfile("--First Parent--"); //select first parent profile object
-				profiles.print();
+				profiles.printp();
 				tempList.removeProfile(parent1);   //removes the selected profile from list
-				profiles.print();
+				profiles.printp();
 				Profile parent2 = tempList.selectProfile("--Second Parent--");
-				profiles.print();
+				profiles.printp();
 				if(conns.addParentConnection(parent1.getID(), parent2.getID(), person.getID())) {
 					//profiles.addProfile(person);
 					System.out.println("\nProfile created");
 				}
 				else {
 					profiles.removeProfile(person);
-					profiles.print();
+					profiles.printp();
 					throw new IOException("\nError: Parents must be connected");
 				}
 			}
