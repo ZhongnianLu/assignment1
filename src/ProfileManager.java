@@ -106,7 +106,7 @@ public class ProfileManager {
 	
 	public void print() {
     	for (int i = 0; i < this.get_Plist().size(); i++) {
-    		System.out.println(this.get_Plist().get(i));
+    		System.out.println(this.get_Plist().get(i).getName());
     	}
     }
 	
