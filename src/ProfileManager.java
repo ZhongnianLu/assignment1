@@ -101,12 +101,6 @@ public class ProfileManager {
 		return names;
 	}
 	
-	public void printp() {
-    	for (int i = 0; i < this.get_Plist().size(); i++) {
-    		System.out.println(this.get_Plist().get(i).getName());
-    	}
-    }
-	
 	public Profile askInfo() throws IOException, InputMismatchException {
 		
 		Scanner scan = new Scanner(System.in);
