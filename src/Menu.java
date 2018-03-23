@@ -77,7 +77,7 @@ public class Menu {
 		//String name = enterName(profiles); // method for entering age
 		try {			
 			Scanner scan = new Scanner(System.in);
-			profiles.print();
+			profiles.printp();
 			System.out.println();
 			System.out.println("\nPlease enter your name : ");
 			String name = scan.nextLine();
