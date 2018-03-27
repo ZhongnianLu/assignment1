@@ -64,7 +64,7 @@ public class ConnectionManager {
 		
 		
 		//create a new connection with selected profiles
-		Friend_Connection addConnect=new Friend_Connection(person1,person2);
+		Friend_Connection addConnect = new Friend_Connection(person1,person2);
 		
 		
 		//check whether the friend connection is valid by calling age check method 
@@ -85,9 +85,9 @@ public class ConnectionManager {
 	// add new parent connection by passing three IDs including parents and child
     boolean addParentConnection(int ID_1,int ID_2,int ID_child){
 	
-    	boolean success=false;
+    	boolean success = false;
     	
-	    ArrayList<Profile> tem_pList=Pmanager.get_Plist();
+	    ArrayList<Profile> tem_pList = Pmanager.get_Plist();
 		
 		Profile person1 = null;
 		Profile person2 = null;
@@ -213,12 +213,11 @@ public class ConnectionManager {
 		
 		        }
 		
-		
 		        //rule of check parent connection is different.
 		        if(tem instanceof Parent_Connection) {
 		    	
 				    if((profile_repeat(tem.getChild(), contain) == false)
-					    &&tem.getChild().getID() != target.getID()) {
+					    && tem.getChild().getID() != target.getID()) {
 				
 				     contain.add(c_list.get(i).getChild());
 			        }
