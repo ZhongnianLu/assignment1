@@ -13,15 +13,13 @@ import java.util.Scanner;
  */
 
 public class ProfileManager {
-	/* ArrayList of profile objects to be used to store profiles */
+	
 	ArrayList<Profile> profiles =new ArrayList<Profile>();
 	
-	/* a constructor can take an ArrayList to immediately be filled */
 	public ProfileManager(ArrayList<Profile> profs) {
 		this.profiles = profs;
 	}
 	
-	/* Normal constructor creates empty ArrayList */
 	public ProfileManager() {
 		this.profiles = new ArrayList<Profile>();
 	}
@@ -30,12 +28,10 @@ public class ProfileManager {
 		return profiles;
 	}
 	
-	//method to add new profile in profile list
 	public void addProfile(Profile add) {
 		profiles.add(add);
 	}
 	
-	//method to remove a profile object from profile list
 	public void removeProfile(Profile del) {
 		profiles.remove(del);
 	}
@@ -90,7 +86,8 @@ public class ProfileManager {
 	}
 	
 	/* Method to return a selected profile from a given list */
-	public Profile selectProfile(String title) throws IOException{
+	public Profile selectProfile(String title) throws IOException {
+		
 		Profile selectProf = null; //initiate profile object
 		ArrayList<Profile> plist = this.get_Plist();
 		int option;
@@ -101,25 +98,31 @@ public class ProfileManager {
 		
 		do{
 			option = Menu.display_Menu(title, names);
+			
 			if ( option >= 1 && option <= names.size()-1) {
 				selectProf = plist.get(option-1);
 			}
+			
 			break;
 		}while(option != 0);
-		return  selectProf;
 		
+		return  selectProf;
 	}
 	
 	/* Method to return list of names of ProgramManager it is used on */
 	public ArrayList<String> listNames() {
+		
 		ArrayList<String> names = new ArrayList<String>();
 		String name;
 		
 		/* Iterate on profile list adding names to list */
 		for (int i = 0; i < this.get_Plist().size(); i++) {
+			
 			name = this.get_Plist().get(i).getName();
 			names.add(name);
-		}				
+			
+		}
+		
 		return names;
 	}
 	
@@ -132,12 +135,16 @@ public class ProfileManager {
 		/* enter name and check if unique */
 		System.out.println("\nPlease enter your name : ");
 		String name = scan.nextLine();
-		if (this.uniqueName(name) != true) throw new IOException("\nError: Name must be unique");
+		if (this.uniqueName(name) != true) {
+			throw new IOException("\nError: Name must be unique");
+		}
 	
 		
 		System.out.println("\nPlease enter your age : "); 
 		int age = scan.nextInt();
-		if (age <= 0) throw new IOException("\nError: Age must be nonzero and positive");
+		if (age <= 0) {
+			throw new IOException("\nError: Age must be nonzero and positive");
+		}
 		
 		scan.nextLine();
 		System.out.println("\nPlease enter a status update : ");   
@@ -152,5 +159,4 @@ public class ProfileManager {
 
 
 }
-
 
