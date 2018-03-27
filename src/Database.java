@@ -24,7 +24,8 @@ public class Database {
 	Profile Veronica = new Profile("Veronica", "contemplating life", 6);
 	
 	/* Set ID's of profiles and add them to profile ArrayList */
-	public ArrayList<Profile> readProfiles(){		
+	public ArrayList<Profile> readProfiles() {		
+		
 		Bob.setID(1);
 		James.setID(2);
 		Mary.setID(3);
@@ -46,14 +47,15 @@ public class Database {
 		
 		
 	/* Create connections of profiles and add them to connection ArrayList */
-	public ArrayList<Connection> readConnections(){		
+	public ArrayList<Connection> readConnections() {		
+		
 		conns.add(new Friend_Connection(Bob, Mary));
 		conns.add(new Friend_Connection(Lisa, James));
 		conns.add(new Couple_Connection(James, Mary));
 		conns.add(new Couple_Connection(Bob, Lisa));
-		
 		conns.add(new Parent_Connection(Bob, Lisa, Veronica));
 		conns.add(new Parent_Connection(James,Mary, Evan));
+		
 		return conns;
 	}
 	
